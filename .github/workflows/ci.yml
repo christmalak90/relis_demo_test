@@ -1,9 +1,44 @@
+# name: CI
+
+# on:
+#   push:
+#     branches:
+#       - main 
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v2
+
+#       - name: Set up PHP
+#         uses: shivammathur/setup-php@v2
+#         with:
+#           php-version: 7.1
+
+#       - name: Install Composer Dependencies
+#         run: composer install
+
+#       - name: Run Unit Tests
+#         run: phpunit --configuration path/to/phpunit.xml
+
+#       - name: Check Test Results
+#         run: |
+#           if [ $? -ne 0 ]; then
+#             echo "Tests failed. Pushing code is not allowed."
+#             exit 1
+#           fi
+#         shell: bash
+
+
 name: CI
 
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   test:
@@ -13,21 +48,30 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.1
+      - name: Set up Docker
+        uses: docker/setup-docker@v2
 
-      - name: Install Composer Dependencies
-        run: composer install
+      - name: Build Docker Image
+        run: docker build
+        working-directory: $GITHUB_WORKSPACE/relis_deployment
 
-      - name: Run Unit Tests
-        run: phpunit --configuration path/to/phpunit.xml
+      - name: Run Docker Containers
+        run: docker-compose up -d
+        working-directory: $GITHUB_WORKSPACE/relis_deployment
 
-      - name: Check Test Results
-        run: |
-          if [ $? -ne 0 ]; then
-            echo "Tests failed. Pushing code is not allowed."
-            exit 1
-          fi
-        shell: bash
+      - name: Wait for Application to Start
+        run: sleep 10
+
+      - name: Make HTTP Request
+        run: curl http://localhost:8083/unit_test/relis_unit_test
+
+      # - name: Stop and Remove Docker Containers
+      #   run: docker-compose down
+      #   working-directory: $GITHUB_WORKSPACE/relis_deployment
+
+      - name: Stop all running Docker Containers
+        run: docker stop $(docker ps -q)
+
+      # - name: Clean Up
+      #   run: docker rm $(docker ps -a -q)
+
