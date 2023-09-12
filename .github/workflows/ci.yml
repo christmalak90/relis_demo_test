@@ -47,6 +47,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
+      - name: Check if Docker is installed
+        run: |
+          if docker --version; then
+            echo "Docker is installed."
+          else
+            echo "Docker is not installed."
+          fi
+
 ######################################
       - name: Debug Workspace
         run: |
@@ -65,8 +73,8 @@ jobs:
       #     context: $GITHUB_WORKSPACE/relis_deployment/docker
       #     push: false
 
-      - name: Set up Docker
-        uses: docker/setup-docker@v2
+      # - name: Set up Docker
+      #   uses: docker/setup-docker@v2
 
       - name: Build Docker Image
         run: docker-compose build
