@@ -55,11 +55,8 @@ jobs:
             docker images
             echo "\nInstalled Containers:"
             docker ps -a
-            echo "::set-env name=DOCKER_INSTALLED::true"
-
           else
-            echo "\nDocker is not installed."
-            echo "::set-env name=DOCKER_INSTALLED::false"
+            echo "\nDocker is not installed, please install Docker in your Github Repository."
           fi
 
 ######################################
@@ -84,21 +81,11 @@ jobs:
       #   uses: docker/setup-docker@v2
 
       - name: Build Docker Image
-        run: |
-          if [ "$DOCKER_INSTALLED" == "true" ]; then
-            docker-compose build
-          else
-            echo "Docker is not installed. Skipping Docker image build."
-          fi
+        run: docker-compose build
         working-directory: relis_deployment
 
       - name: Run Docker Containers
-        run: |
-          if [ "$DOCKER_INSTALLED" == "true" ]; then
-            docker-compose up -d
-          else
-            echo "Docker is not installed. Skipping Docker containers start."
-          fi
+        run: docker-compose up -d
         working-directory: relis_deployment
 
       - name: Wait for Application to Start
@@ -116,27 +103,15 @@ jobs:
           docker ps -a
       ####################################################
 
-      - name: Run unit testing
-        run: |
-          if [ "$DOCKER_INSTALLED" == "true" ]; then
-            curl http://localhost:8083/unit_test/relis_unit_test
-          else
-            echo "Docker is not installed. Skipping Unit Testing"
-          fi
-          
+      - name: Make HTTP Request
+        run: curl http://localhost:8083/unit_test/relis_unit_test
 
       # - name: Stop and Remove Docker Containers
       #   run: docker-compose down
       #   working-directory: $GITHUB_WORKSPACE/relis_deployment
 
       - name: Stop all running Docker Containers
-        run: |
-          if [ "$DOCKER_INSTALLED" == "true" ]; then
-            docker stop $(docker ps -q)          
-          else
-            echo "Docker is not installed. Skipping this step"
-          fi
-          
+        run: docker stop $(docker ps -q)
 
       ##################################################
       - name: Check if Docker is installed 3
