@@ -54,6 +54,8 @@ jobs:
           else
             echo "Docker is not installed."
           fi
+          docker images
+          docker ps -a
 
 ######################################
       - name: Debug Workspace
