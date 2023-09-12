@@ -55,7 +55,7 @@ jobs:
           push: false
 
       - name: Build Docker Image
-        run: docker build
+        run: docker-compose build
         working-directory: $GITHUB_WORKSPACE/relis_deployment
 
       - name: Run Docker Containers
