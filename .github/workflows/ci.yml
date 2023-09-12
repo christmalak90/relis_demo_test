@@ -3,7 +3,7 @@
 # on:
 #   push:
 #     branches:
-#       - main 
+#       - main
 
 # jobs:
 #   test:
@@ -32,7 +32,6 @@
 #           fi
 #         shell: bash
 
-
 name: CI
 
 on:
@@ -47,6 +46,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+######################################
+      - name: Debug Workspace
+        run: |
+          echo "Workspace: $GITHUB_WORKSPACE"
+          ls -l $GITHUB_WORKSPACE/relis_deployment
+
+      - name: Debug Repository
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF"
+#########################################
 
       - name: Set up Docker
         uses: docker/build-push-action@v2
@@ -77,4 +88,3 @@ jobs:
 
       # - name: Clean Up
       #   run: docker rm $(docker ps -a -q)
-
