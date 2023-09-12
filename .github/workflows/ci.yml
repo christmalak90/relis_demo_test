@@ -89,6 +89,18 @@ jobs:
       - name: Wait for Application to Start
         run: sleep 10
 
+      ##################################################
+      - name: Check if Docker is installed 2
+        run: |
+          if docker --version; then
+            echo "Docker is installed."
+          else
+            echo "Docker is not installed."
+          fi
+          docker images
+          docker ps -a
+      ####################################################
+
       - name: Make HTTP Request
         run: curl http://localhost:8083/unit_test/relis_unit_test
 
@@ -98,6 +110,18 @@ jobs:
 
       - name: Stop all running Docker Containers
         run: docker stop $(docker ps -q)
+
+      ##################################################
+      - name: Check if Docker is installed 3
+        run: |
+          if docker --version; then
+            echo "Docker is installed."
+          else
+            echo "Docker is not installed."
+          fi
+          docker images
+          docker ps -a
+      ####################################################
 
       # - name: Clean Up
       #   run: docker rm $(docker ps -a -q)
