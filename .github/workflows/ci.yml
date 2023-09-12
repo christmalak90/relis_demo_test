@@ -16,10 +16,18 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.1 
+          php-version: 7.1
 
       - name: Install Composer Dependencies
         run: composer install
 
       - name: Run Unit Tests
         run: phpunit --configuration path/to/phpunit.xml
+
+      - name: Check Test Results
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Tests failed. Pushing code is not allowed."
+            exit 1
+          fi
+        shell: bash
