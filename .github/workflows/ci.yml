@@ -50,13 +50,13 @@ jobs:
       - name: Check if Docker is installed
         run: |
           if docker --version; then
-            echo "Docker is installed."
-            echo "\nInstalled Images:"
-            docker images
-            echo "\nInstalled Containers:"
-            docker ps -a
+            echo "Docker is installed in your repository."
+            # echo "Installed Images:"
+            # docker images
+            # echo "Installed Containers:"
+            # docker ps -a
           else
-            echo "\nDocker is not installed, please install Docker in your Github Repository."
+            echo "Docker is not installed, please install Docker in your Github Repository."
           fi
 
 ######################################
@@ -103,7 +103,7 @@ jobs:
           docker ps -a
       ####################################################
 
-      - name: Make HTTP Request
+      - name: Run Unit test
         run: curl http://localhost:8083/unit_test/relis_unit_test
 
       # - name: Stop and Remove Docker Containers
