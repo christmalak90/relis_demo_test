@@ -24,7 +24,7 @@ function request($method, $endpoint, $data = [], $headers = [])
 {
     // Construct the full URL by appending the endpoint to the base URL
     $url = 'http://host.docker.internal:8083/' . $endpoint;
-
+ 
     // Initialize cURL session
     $curl = curl_init($url);
 
