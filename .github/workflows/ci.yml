@@ -13,17 +13,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      #######################################
-      - name: Check if PHP is Installed
-        run: |
-          if php -v; then
-            echo "PHP is installed."
-          else
-            echo "PHP is not installed."
-            exit 1
-          fi
-        #######################################
-
       - name: Check if Docker is installed
         run: |
           if docker --version; then
@@ -48,15 +37,12 @@ jobs:
         run: sleep 10
 
       - name: Run Unit test
-        run: | 
-          response=$(curl -sS http://localhost:8083/unit_test/relis_unit_test)
+        run: |
+          php -r "echo file_get_contents('http://localhost:8083/unit_test/relis_unit_test');"
           echo "Response: $response"
 
       - name: Stop all running Docker Containers
         run: docker stop $(docker ps -q)
-
-
-
 
 
 
@@ -121,3 +107,14 @@ jobs:
 
 # - name: Clean Up
 #   run: docker rm $(docker ps -a -q)
+
+# #######################################
+# - name: Check if PHP is Installed
+#   run: |
+#     if php -v; then
+#       echo "PHP is installed."
+#     else
+#       echo "PHP is not installed."
+#       exit 1
+#     fi
+#   #######################################
