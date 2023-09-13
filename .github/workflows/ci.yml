@@ -48,7 +48,7 @@ jobs:
       - name: Display Logs
         run: |
           #docker exec relis-app cat /u/relis/public_html/relis_app/
-          docker exec relis-app ls /u/relis/public_html/relis_app/logs/
+          #docker exec relis-app ls /u/relis/public_html/relis_app/logs/
           docker logs relis-app
 ####################################################################
 
