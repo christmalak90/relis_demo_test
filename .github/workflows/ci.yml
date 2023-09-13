@@ -36,6 +36,11 @@ jobs:
       - name: Wait for Application to Start
         run: sleep 10
 
+      - name: Set relis-app Container permission
+        run: |
+          docker exec -it relis-app /bin/sh
+          chmod -R 777 /u/relis/public_html/
+
       - name: Run Unit test
         run: |
           response=$(php -r " echo file_get_contents('http://localhost:8083/user/new_user');")
