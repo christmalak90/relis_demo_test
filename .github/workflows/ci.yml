@@ -16,11 +16,11 @@ jobs:
       #######################################
       - name: Check if PHP is Installed
         run: |
-          if ! command -v php &> /dev/null; then
+          if php -v; then
+            echo "PHP is installed."
+          else
             echo "PHP is not installed."
             exit 1
-          else
-            echo "PHP is installed."
           fi
         #######################################
 
