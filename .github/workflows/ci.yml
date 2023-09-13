@@ -45,6 +45,10 @@ jobs:
           echo "Response: $response"
 
 ####################################################################
+      - name: Display IP Adress of relis-app
+        run: |
+          docker exec relis-app hostname -I
+
       - name: Display Logs
         run: |
           #docker exec relis-app cat /u/relis/public_html/relis_app/
