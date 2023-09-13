@@ -1,3 +1,52 @@
+name: Unit Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Check if Docker is installed
+        run: |
+          if docker --version; then
+            echo "Docker is installed in your repository."
+            # echo "Installed Images:"
+            # docker images
+            # echo "Installed Containers:"
+            # docker ps -a
+          else
+            echo "Docker is not installed, please install Docker in your Github Repository."
+          fi
+
+      - name: Build Docker Image
+        run: docker-compose build
+        working-directory: relis_deployment
+
+      - name: Run Docker Containers
+        run: docker-compose up -d
+        working-directory: relis_deployment
+
+      - name: Wait for Application to Start
+        run: sleep 10
+
+      - name: Run Unit test
+        run: curl http://localhost:8083/unit_test/relis_unit_test
+
+      - name: Stop all running Docker Containers
+        run: docker stop $(docker ps -q)
+
+
+
+
+
+        
 # name: CI
 
 # on:
@@ -32,98 +81,30 @@
 #           fi
 #         shell: bash
 
-name: CI
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Check if Docker is installed
-        run: |
-          if docker --version; then
-            echo "Docker is installed in your repository."
-            # echo "Installed Images:"
-            # docker images
-            # echo "Installed Containers:"
-            # docker ps -a
-          else
-            echo "Docker is not installed, please install Docker in your Github Repository."
-          fi
-
 ######################################
-      # - name: Debug Workspace
-      #   run: |
-      #     echo "Workspace: $GITHUB_WORKSPACE"
-      #     ls -l $GITHUB_WORKSPACE/relis_deployment
+# - name: Debug Workspace
+#   run: |
+#     echo "Workspace: $GITHUB_WORKSPACE"
+#     ls -l $GITHUB_WORKSPACE/relis_deployment
 
-      # - name: Debug Repository
-      #   run: |
-      #     echo "Repository: $GITHUB_REPOSITORY"
-      #     echo "Branch: $GITHUB_REF"
+# - name: Debug Repository
+#   run: |
+#     echo "Repository: $GITHUB_REPOSITORY"
+#     echo "Branch: $GITHUB_REF"
 #########################################
 
-      # - name: Set up Docker
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: $GITHUB_WORKSPACE/relis_deployment/docker
-      #     push: false
+# - name: Set up Docker
+#   uses: docker/build-push-action@v2
+#   with:
+#     context: $GITHUB_WORKSPACE/relis_deployment/docker
+#     push: false
 
-      # - name: Set up Docker
-      #   uses: docker/setup-docker@v2
+# - name: Set up Docker
+#   uses: docker/setup-docker@v2
 
-      - name: Build Docker Image
-        run: docker-compose build
-        working-directory: relis_deployment
+# - name: Stop and Remove Docker Containers
+#   run: docker-compose down
+#   working-directory: $GITHUB_WORKSPACE/relis_deployment
 
-      - name: Run Docker Containers
-        run: docker-compose up -d
-        working-directory: relis_deployment
-
-      - name: Wait for Application to Start
-        run: sleep 10
-
-      ##################################################
-      - name: Check if Docker is installed 2
-        run: |
-          if docker --version; then
-            echo "Docker is installed."
-          else
-            echo "Docker is not installed."
-          fi
-          docker images
-          docker ps -a
-      ####################################################
-
-      - name: Run Unit test
-        run: curl http://localhost:8083/unit_test/relis_unit_test
-
-      # - name: Stop and Remove Docker Containers
-      #   run: docker-compose down
-      #   working-directory: $GITHUB_WORKSPACE/relis_deployment
-
-      - name: Stop all running Docker Containers
-        run: docker stop $(docker ps -q)
-
-      ##################################################
-      - name: Check if Docker is installed 3
-        run: |
-          if docker --version; then
-            echo "Docker is installed."
-          else
-            echo "Docker is not installed."
-          fi
-          docker images
-          docker ps -a
-      ####################################################
-
-      # - name: Clean Up
-      #   run: docker rm $(docker ps -a -q)
+# - name: Clean Up
+#   run: docker rm $(docker ps -a -q)
