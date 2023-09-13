@@ -37,17 +37,20 @@ jobs:
         run: sleep 10
 
       - name: Set relis-app Container permission
-        run: docker exec relis-app sh -c "chmod -R 777 /u/relis/public_html/"
+        run: docker exec relis-app chmod -R 777 /u/relis/public_html/
         #tty: false  # Disable interactive terminal
 
 ####################################################################
       - name: Wait for Application to Start 2
         run: sleep 120
+
+      - name: Check docker status
+        run: docker ps
 ###################################################################
 
       - name: Run Unit test
         run: |
-          response=$(php -r " echo file_get_contents('http://host.docker.internal:8083/user/new_user');")
+          response=$(php -r " echo file_get_contents('http://localhost:8083/user/new_user');")
           echo "Response: $response"
 
       - name: Stop all running Docker Containers
