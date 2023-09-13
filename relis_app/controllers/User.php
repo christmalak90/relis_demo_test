@@ -338,38 +338,17 @@ class User extends CI_Controller
      *
      * @param array $data
      */
-    //////////////////////////////////////////////////////////////////////////
-    // public function new_user($data = [])
-    // {
-    //     if ($this->session->userdata('user_id')) {
-    //         //If there is an open user session the user is redirected to the home page
-    //         redirect('home');
-    //     } else {
-    //         $data['page'] = 'user/h_create_user';
-    //         $this->load->view('shared/h_body', $data);
-    //     }
-    //     return;
-    // }
-    /////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////
     public function new_user($data = [])
     {
-        try {
-            if ($this->session->userdata('user_id')) {
-                // If there is an open user session, the user is redirected to the home page
-                redirect('home');
-            } else {
-                $data['page'] = 'user/h_create_user';
-                $this->load->view('shared/h_body', $data);
-            }
-        } catch (Exception $e) {
-            // Output the exception message directly
-            echo 'An internal server error occurred. Please try again later. Error: ' . $e->getMessage();
+        if ($this->session->userdata('user_id')) {
+            //If there is an open user session the user is redirected to the home page
+            redirect('home');
+        } else {
+            $data['page'] = 'user/h_create_user';
+            $this->load->view('shared/h_body', $data);
         }
+        return;
     }
-///////////////////////////////////////////////////////////////
 
     /**
      *Add new user
