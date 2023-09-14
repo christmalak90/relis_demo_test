@@ -38,36 +38,15 @@ jobs:
 
       - name: Set relis-app Container permission
         run: |
-          docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
+          docker exec relis-app chmod -R 755 /u/relis/public_html/relis_app/
 
       - name: Run Unit test
         run: |
           response=$(php -r " echo file_get_contents('http://localhost:8083/user.html');")
           echo "Response: $response"
 
-####################################################################
-      - name: Display IP Adress of relis-app
-        run: |
-          docker exec relis-app hostname -I
-
-      - name: Display Logs
-        run: |
-          #docker exec relis-app cat /u/relis/public_html/relis_app/
-          echo "List of files in relis_app/logs/:"
-          docker exec relis-app ls /u/relis/public_html/relis_app/logs/
-          echo "relis-app logs:"
-          docker logs relis-app
-          #echo "Ping to google:"
-          #ping -c 5 www.google.com
-          #echo "Apache logs:"
-          #docker exec relis-app cat /var/log/apache2/error.log
-####################################################################
-
       - name: Stop all running Docker Containers
         run: docker stop $(docker ps -q)
-
-
-
 # name: CI
 
 # on:
@@ -140,3 +119,16 @@ jobs:
 #       exit 1
 #     fi
 #   #######################################
+# - name: Display IP Adress of relis-app
+#   run: |
+#     docker exec relis-app hostname -I
+
+#- name: Display Logs
+#   run: |
+#     #docker exec relis-app cat /u/relis/public_html/relis_app/
+#     echo "List of files in relis_app/logs/:"
+#     docker exec relis-app ls /u/relis/public_html/relis_app/logs/
+#     echo "relis-app logs:"
+#     docker logs relis-app
+#     #echo "Apache logs:"
+#     #docker exec relis-app cat /var/log/apache2/error.log

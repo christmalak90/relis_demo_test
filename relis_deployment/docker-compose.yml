@@ -61,7 +61,3 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-#######################################################
-    # environment:
-    #   - APACHE_SERVER_NAME=172.18.0.6 
-#########################################################

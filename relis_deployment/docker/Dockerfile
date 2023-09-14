@@ -19,14 +19,6 @@ RUN docker-php-ext-install intl mysqli pdo pdo_mysql
 RUN pecl install xdebug-2.8.0 \
     && docker-php-ext-enable xdebug
 
-###############################
-# Set ServerName from environment variable
-# ENV APACHE_SERVER_NAME localhost 
-
-# # Add your ServerName directive to the Apache configuration
-# RUN echo "ServerName ${APACHE_SERVER_NAME}" >> /etc/apache2/apache2.conf
-#######################################
-
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer --version
