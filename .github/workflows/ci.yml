@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Unit test
         run: |
-          response=$(php -r " echo file_get_contents('http://localhost:8083/user/new_user');")
+          response=$(php -r " echo file_get_contents('http://localhost:8083/unit_test/relis_unit_test');")
           echo "Response: $response"
 
       - name: Stop all running Docker Containers
