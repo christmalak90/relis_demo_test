@@ -21,10 +21,10 @@ RUN pecl install xdebug-2.8.0 \
 
 ###############################
 # Set ServerName from environment variable
-ENV APACHE_SERVER_NAME localhost 
+# ENV APACHE_SERVER_NAME localhost 
 
-# Add your ServerName directive to the Apache configuration
-RUN echo "ServerName ${APACHE_SERVER_NAME}" >> /etc/apache2/apache2.conf
+# # Add your ServerName directive to the Apache configuration
+# RUN echo "ServerName ${APACHE_SERVER_NAME}" >> /etc/apache2/apache2.conf
 #######################################
 
 # Install Composer

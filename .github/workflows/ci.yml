@@ -57,8 +57,8 @@ jobs:
           docker exec relis-app ls /u/relis/public_html/relis_app/logs/
           echo "relis-app logs:"
           docker logs relis-app
-          echo "Ping to google:"
-          ping -c 5 www.google.com
+          #echo "Ping to google:"
+          #ping -c 5 www.google.com
           #echo "Apache logs:"
           #docker exec relis-app cat /var/log/apache2/error.log
 ####################################################################
