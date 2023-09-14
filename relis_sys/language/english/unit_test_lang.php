@@ -39,7 +39,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['ut_test_name'] = 'Test Name';
 $lang['ut_test_datatype'] = 'Test Datatype';
+$lang['ut_test_value'] = 'Test Value';////////////////////////////////// NEW ///////////////////////
 $lang['ut_res_datatype'] = 'Expected Datatype';
+$lang['ut_res_value'] = 'Expected value';///////////////////////////////// NEW ////////////////////
 $lang['ut_result'] = 'Result';
 $lang['ut_undefined'] = 'Undefined Test Name';
 $lang['ut_file'] = 'File Name';

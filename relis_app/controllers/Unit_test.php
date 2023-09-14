@@ -1,4 +1,5 @@
 <?php
+////////////////////////////////// NEW //////////////////////////////////
 /* ReLiS - A Tool for conducting systematic literature reviews and mapping studies.
  * Copyright (C) 2018  Eugene Syriani
  
@@ -50,7 +51,7 @@ class Unit_test extends CI_Controller
         </table>';
     }
 
-    public function relis_unit_test()
+    public function relis_unit_test($result = "html_report")
     {
         #################### TEST USER CONTROLLER ####################
 
@@ -117,7 +118,15 @@ class Unit_test extends CI_Controller
 
 
         #################### REPORT ####################
-        echo $this->unit->report();
+
+        if ($result == "html_report") {
+            echo $this->unit->report();
+        } elseif ($result == "raw_data") {
+            print_r($this->unit->result());
+        }
+        elseif ($result == "last_result") {
+            print_r($this->unit->last_result());
+        }
     }
 }
 
