@@ -38,9 +38,19 @@ jobs:
           docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
 
       - name: Run Unit test
+        id: unit-test
         run: |
           response=$(php -r " echo file_get_contents('http://localhost:8083/unit_test/relis_unit_test/last_result');")
           echo "Response: $response"
+
+      - name: Unit test Decision
+        run: |
+          if [ "$response" == "failed" ]; then
+            echo "The unit test failed. Pushing code not allowed."
+            exit 1
+          else
+            echo "The unit test passed. Proceeding with the workflow."
+          fi
 
       - name: Stop all running Docker Containers
         run: docker stop $(docker ps -q)
