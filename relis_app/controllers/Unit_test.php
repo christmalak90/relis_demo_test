@@ -73,7 +73,7 @@ class Unit_test extends CI_Controller
         preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
         $url = $matches[1];
 
-        $expected_response_code = 200;
+        $expected_response_code = '200';
         $expected_url = 'user/new_user';
 
         $this->unit->run($response_code, $expected_response_code, $test_name);
@@ -95,7 +95,7 @@ class Unit_test extends CI_Controller
         preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
         $url = $matches[1];
 
-        $expected_response_code = 307;
+        $expected_response_code = 3070;
         $expected_url = 'home';
 
         $this->unit->run($response_code, $expected_response_code, $test_name);
