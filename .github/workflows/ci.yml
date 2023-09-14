@@ -17,10 +17,6 @@ jobs:
         run: |
           if docker --version; then
             echo "Docker is installed in your repository."
-            # echo "Installed Images:"
-            # docker images
-            # echo "Installed Containers:"
-            # docker ps -a
           else
             echo "Docker is not installed, please install Docker in your Github Repository."
           fi
