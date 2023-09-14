@@ -304,8 +304,7 @@ class CI_Unit_test
 	 */
 	public function last_result($results = array())
 	{
-		$result_array['result'] = 'successful';
-		$result_array['tests_failed'] = [];
+		$is_success = true;
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
 
@@ -315,12 +314,15 @@ class CI_Unit_test
 
 		foreach ($results as $result) {
 			if($result['result'] == 'failed'){
-				$result_array['result'] = 'failed';
-				array_push($result_array['tests_failed'], $result);
+				$is_success = false;
 			}
 		}
+		
+		if($is_success == true){
+			return "successful";
+		}
 
-		return $result_array;
+		return "failed";
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
