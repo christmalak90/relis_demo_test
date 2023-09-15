@@ -90,7 +90,7 @@ class Unit_test extends CI_Controller
         $response_code = $get_response['status_code'];
         preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
         $url = $matches[1];
-        $expected_response_code = '307';
+        $expected_response_code = 307;
         $expected_url = 'home';
         $this->unit->run($response_code, $expected_response_code, $test_name);
         $this->unit->run($url, $expected_url, $test_name);
