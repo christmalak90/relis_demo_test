@@ -1,5 +1,5 @@
 ############################### NEW ################################
-name: Unit Testing
+name: Relis
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  unit_test:
+  relis_unit_testing:
     runs-on: ubuntu-latest
 
     steps:
