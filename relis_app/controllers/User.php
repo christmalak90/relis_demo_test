@@ -1,5 +1,4 @@
 <?php
-//////////////////////////////////////////////////
 /* ReLiS - A Tool for conducting systematic literature reviews and mapping studies.
  * Copyright (C) 2018  Eugene Syriani
  *

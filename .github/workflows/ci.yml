@@ -41,8 +41,7 @@ jobs:
         run: |
           response=$(php -r " echo file_get_contents('http://localhost:8083/unit_test/relis_unit_test/last_result');")
           if [ $response == "failed" ]; then
-            echo "The unit test failed. Pushing code not allowed."
-            echo "For more details, please access the following URL in your local web browser:"
+            echo "The unit test failed. For more details, please access the following URL in your local web browser:"
             echo "http://localhost:8083/unit_test/relis_unit_test"
             exit 1
           else
