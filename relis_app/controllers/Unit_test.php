@@ -38,18 +38,18 @@ class Unit_test extends CI_Controller
         //$this->unit->set_template($this->report_template());
     }
 
-    private function report_template()
-    {
-        return '
-        <table border="0" cellpadding="4" cellspacing="1">
-        {rows}
-                <tr>
-                        <td>{item}</td>
-                        <td>{result}</td>
-                </tr>
-        {/rows}
-        </table>';
-    }
+    // private function report_template()
+    // {
+    //     return '
+    //     <table border="0" cellpadding="4" cellspacing="1">
+    //     {rows}
+    //             <tr>
+    //                     <td>{item}</td>
+    //                     <td>{result}</td>
+    //             </tr>
+    //     {/rows}
+    //     </table>';
+    // }
 
     public function relis_unit_test($result = "html_report")
     {
@@ -65,17 +65,14 @@ class Unit_test extends CI_Controller
          * Expected HTTP Response Code : 200 (indicating a successful response from the server).
          * Expected URL : user/new_user (The expected URL after the user's action)
          */
-
         $test_name = "Test new_user action when user is not already logged in";
         $this->session->set_userdata('user_id', 0);
         $get_response = http_GET('user/new_user');
         $response_code = $get_response['status_code'];
         preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
         $url = $matches[1];
-
-        $expected_response_code = 2000;
+        $expected_response_code = 200;
         $expected_url = 'user/new_user';
-
         $this->unit->run($response_code, $expected_response_code, $test_name);
         $this->unit->run($url, $expected_url, $test_name);
 
@@ -87,17 +84,14 @@ class Unit_test extends CI_Controller
          * Expected HTTP Response Code : 307 (indicating a temporary Redirect code)
          * Expected URL : home (The expected URL after the user's action)
          */
-
         $test_name = "Test new_user action when user is already logged in";
         $this->session->set_userdata('user_id', 1);
         $get_response = http_GET('user/new_user', ['Cookie: relis_session=dsqrv2lu49khh5g6gmvsq8pked3vabjt']);
         $response_code = $get_response['status_code'];
         preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
         $url = $matches[1];
-
         $expected_response_code = 307;
         $expected_url = 'home';
-
         $this->unit->run($response_code, $expected_response_code, $test_name);
         $this->unit->run($url, $expected_url, $test_name);
 
@@ -123,8 +117,7 @@ class Unit_test extends CI_Controller
             echo $this->unit->report();
         } elseif ($result == "raw_data") {
             print_r($this->unit->result());
-        }
-        elseif ($result == "last_result") {
+        } elseif ($result == "last_result") {
             print_r($this->unit->last_result());
         }
     }
