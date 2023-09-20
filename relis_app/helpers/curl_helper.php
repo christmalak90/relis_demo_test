@@ -58,7 +58,7 @@ function request($method, $endpoint, $data = [], $headers = [])
 
     // Return the response data as an associative array
     return [
-        'status_code' => $urlInfo['http_code'],
+        'status_code' => $urlInfo['http_code'] . ' ' . stautus_code_description()[$urlInfo['http_code']],
         // HTTP headers
         'headers' => $header,
         // Response content

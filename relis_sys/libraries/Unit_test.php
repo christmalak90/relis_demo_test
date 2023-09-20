@@ -95,10 +95,13 @@ class CI_Unit_test
 	 */
 	protected $_test_items_visible = array(
 		'test_name',
+		'tested_aspect',
 		'test_datatype',
-		'test_value',//////////////////////////////////////// NEW /////////////////////////////
+		'test_value',
+		//////////////////////////////////////// NEW /////////////////////////////
 		'res_datatype',
-		'res_value',///////////////////////////////////////// NEW ///////////////////////
+		'res_value',
+		///////////////////////////////////////// NEW ///////////////////////
 		'result',
 		'file',
 		'line',
@@ -147,7 +150,7 @@ class CI_Unit_test
 	 * @param	string	$notes
 	 * @return	string
 	 */
-	public function run($test, $expected = TRUE, $test_name = 'undefined', $notes = '')
+	public function run($test, $expected = TRUE, $test_name = 'undefined', $tested_aspect = 'undefined', $notes = '')
 	{
 		if ($this->active === FALSE) {
 			return FALSE;
@@ -165,10 +168,13 @@ class CI_Unit_test
 
 		$report = array(
 			'test_name' => $test_name,
-			'test_datatype' => gettype($test),
-			'test_value' => $test,/////////////////////////////////// NEW /////////////////////
+			'tested_aspect' => $tested_aspect,
+			/////////////////////////////////// NEW /////////////////////
 			'res_datatype' => $extype,
-			'res_value' => $expected,///////////////////////////////// NEW ////////////////////
+			'res_value' => $expected,
+			///////////////////////////////// NEW ////////////////////
+			'test_datatype' => gettype($test),
+			'test_value' => $test,
 			'result' => ($result === TRUE) ? 'passed' : 'failed',
 			'file' => $back['file'],
 			'line' => $back['line'],
@@ -192,16 +198,44 @@ class CI_Unit_test
 	 */
 	public function report($result = array())
 	{
+		$tests_passed = 0; ////////////////////////// NEW ////////////////////
+		$tests_failed = 0; ////////////////////////// NEW ////////////////////
+
 		if (count($result) === 0) {
 			$result = $this->result();
 		}
+
+		/////////////////////////////////// NEW /////////////////////////////////
+		foreach ($result as $res) {
+			if ($res['Status'] == 'Passed') {
+				$tests_passed += 1;
+			}
+			if ($res['Status'] == 'Failed') {
+				$tests_failed += 1;
+			}
+		}
+		////////////////////////////////////////////////////////
 
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
 
 		$this->_parse_template();
 
-		$r = '';
+		///////////////////////////////////////// NEW /////////////////////////////////////
+		$r = '<table style="background-color:#f0f5f5; font-size:small; text-align:center; margin:0 auto; border-collapse:collapse; border:1px solid #CCC;">
+        		<tr>
+            		<th style="padding: 2px; border-collapse:collapse; border:1px solid #CCC;">Nbr of tests</th>
+            		<th style="padding: 2px; border-collapse:collapse; border:1px solid #CCC;">Tests passed</th>
+            		<th style="padding: 2px; border-collapse:collapse; border:1px solid #CCC;">Tests failed</th>
+        		</tr>
+        		<tr>
+            		<td style="padding: 2px; border-collapse:collapse; border:1px solid #CCC;">' . count($result) . '</td>
+            		<td style="padding: 2px; border-collapse:collapse; border:1px solid #CCC; color: #0C0;">' . $tests_passed . '</td>
+            		<td style="padding: 2px; border-collapse:collapse; border:1px solid #CCC; color: #C00;">' . $tests_failed . '</td>
+        		</tr>
+    		</table>';
+		////////////////////////////////////////////////////////
+
 		foreach ($result as $res) {
 			$table = '';
 
@@ -278,7 +312,7 @@ class CI_Unit_test
 			foreach ($result as $key => $val) {
 				if (!in_array($key, $this->_test_items_visible)) {
 					continue;
-				} elseif (in_array($key, array('test_name', 'test_datatype', 'test_value', 'res_datatype', 'res_value', 'result'), TRUE)) {//////////////////////////////////// NEW ///////////////////////
+				} elseif (in_array($key, array('test_name', 'tested_aspect', 'test_datatype', 'test_value', 'res_datatype', 'res_value', 'result'), TRUE)) { //////////////////////////////////// NEW ///////////////////////
 					if (FALSE !== ($line = $CI->lang->line(strtolower('ut_' . $val), FALSE))) {
 						$val = $line;
 					}
@@ -313,12 +347,12 @@ class CI_Unit_test
 		}
 
 		foreach ($results as $result) {
-			if($result['result'] == 'failed'){
+			if ($result['result'] == 'failed') {
 				$is_success = false;
 			}
 		}
-		
-		if($is_success == true){
+
+		if ($is_success == true) {
 			return "successful";
 		}
 
@@ -368,7 +402,7 @@ class CI_Unit_test
 	 */
 	protected function _default_template()
 	{
-		$this->_template = "\n" . '<table style="width:100%; background-color:#f0f5f5; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">{rows}' . "\n</table>";////////////////////////////////// NEW ///////////////////////////
+		$this->_template = "\n" . '<table style="width:100%; background-color:#f0f5f5; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">{rows}' . "\n</table>"; ////////////////////////////////// NEW ///////////////////////////
 
 		$this->_template_rows = "\n\t<tr>\n\t\t" . '<th style="text-align: left; border-bottom:1px solid #CCC;">{item}</th>'
 			. "\n\t\t" . '<td style="border-bottom:1px solid #CCC;">{result}</td>' . "\n\t</tr>";

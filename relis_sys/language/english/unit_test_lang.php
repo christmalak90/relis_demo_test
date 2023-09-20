@@ -37,13 +37,14 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ut_test_name'] = 'Test Name';
-$lang['ut_test_datatype'] = 'Test Datatype';
-$lang['ut_test_value'] = 'Test Value';////////////////////////////////// NEW ///////////////////////
-$lang['ut_res_datatype'] = 'Expected Datatype';
-$lang['ut_res_value'] = 'Expected value';///////////////////////////////// NEW ////////////////////
-$lang['ut_result'] = 'Result';
-$lang['ut_undefined'] = 'Undefined Test Name';
+$lang['ut_test_name'] = 'Test name';
+$lang['ut_tested_aspect'] = 'Tested aspect';
+$lang['ut_test_datatype'] = 'Actual datatype';
+$lang['ut_test_value'] = 'Actual result';////////////////////////////////// NEW ///////////////////////
+$lang['ut_res_datatype'] = 'Expected datatype';
+$lang['ut_res_value'] = 'Expected result';///////////////////////////////// NEW ////////////////////
+$lang['ut_result'] = 'Status';
+$lang['ut_undefined'] = 'Undefined';
 $lang['ut_file'] = 'File Name';
 $lang['ut_line'] = 'Line Number';
 $lang['ut_passed'] = 'Passed';

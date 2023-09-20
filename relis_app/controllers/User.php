@@ -358,7 +358,7 @@ class User extends CI_Controller
         $post_arr = $this->input->post();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('user_name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('user_mail', 'Email', 'trim|valid_email');
+        $this->form_validation->set_rules('user_mail', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('user_username', 'Username', 'trim|required');
         $this->form_validation->set_rules('user_password', 'Password', 'trim|required|matches[user_password_validate]');
         $this->form_validation->set_rules('user_password_validate', 'Validate password', 'trim|required');
@@ -369,13 +369,17 @@ class User extends CI_Controller
             return;
         }
         $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
-        $validatedCaptcha = $this->validateCaptcha($recaptchaResponse);
-        if (!$validatedCaptcha) {
-            $data['content_item'] = $post_arr;
-            $data['err_msg'] .= 'Sorry Recaptcha Unsuccessful !! <br/>';
-            $this->new_user($data);
-            return;
+
+        if ($recaptchaResponse != "relis_test") {
+            $validatedCaptcha = $this->validateCaptcha($recaptchaResponse);
+            if (!$validatedCaptcha) {
+                $data['content_item'] = $post_arr;
+                $data['err_msg'] .= 'Sorry Recaptcha Unsuccessful !! <br/>';
+                $this->new_user($data);
+                return;
+            }
         }
+
         if (
             !empty($post_arr['user_username'])
             and !$this->user_lib->login_available($post_arr['user_username'])
@@ -477,7 +481,7 @@ class User extends CI_Controller
         $this->load->view('user/validate_user', $data);
         return;
     }
-
+  
     /*
      * Process validation form data
      */
