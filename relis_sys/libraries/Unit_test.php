@@ -347,7 +347,7 @@ class CI_Unit_test
 		}
 
 		foreach ($results as $result) {
-			if ($result['result'] === 'failed') {
+			if ($result['result'] == 'failed') {
 				$is_success = false;
 			}
 		}

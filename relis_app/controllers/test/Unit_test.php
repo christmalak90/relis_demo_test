@@ -53,7 +53,7 @@ class Unit_test extends CI_Controller
          * Expected URL : user/new_user (The expected URL after the user's action)
          */
         $this->session->set_userdata('user_id', 0);
-        $test_name = "Go to new user form page when user is not already logged in";
+        $test_name = "Go to new user form page when user is not already logged inn";
         $test_aspect_HTTP_code = "HTTP response code";
         $test_aspect_url = "Target URL";
         $get_response = http_GET('user/new_user');
