@@ -344,7 +344,7 @@ class User extends CI_Controller
             //If there is an open user session the user is redirected to the home page
             redirect('home');
         } else {
-            $data['page'] = 'user/h_create_userr';
+            $data['page'] = 'user/h_create_user';
             $this->load->view('shared/h_body', $data);
         }
         return;

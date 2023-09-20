@@ -342,12 +342,12 @@ class CI_Unit_test
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
 
-		if (count($results) == 0) {
+		if (count($results) === 0) {
 			$results = $this->results;
 		}
 
 		foreach ($results as $result) {
-			if ($result['result'] == 'failed') {
+			if ($result['result'] === 'failed') {
 				$is_success = false;
 			}
 		}
