@@ -1,5 +1,5 @@
 <?php
-//////////////////////////////////////// NEW /////////////////////////////
+		//////////////////////////////////////// NEW /////////////////////////////
 
 /**
  * CodeIgniter
@@ -344,6 +344,7 @@ class CI_Unit_test
 	 */
 	public function last_result($results = array())
 	{
+		$is_success = true;
 		$CI =& get_instance();
 		$CI->load->language('unit_test');
 
@@ -351,16 +352,13 @@ class CI_Unit_test
 			$results = $this->results;
 		}
 
-		$nbrOfTests = count($results);
-		$nbrOfPassedTests = 0;
-
 		foreach ($results as $result) {
-			if ($result['result'] == 'passed') {
-				$nbrOfPassedTests = $nbrOfPassedTests + 1;
+			if ($result['result'] == 'failed') {
+				$is_success = false;
 			}
 		}
 
-		if ($nbrOfPassedTests == $nbrOfTests) {
+		if ($is_success == true) {
 			return "successful";
 		}
 
