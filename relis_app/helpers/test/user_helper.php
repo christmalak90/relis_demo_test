@@ -23,7 +23,7 @@ function user_unitTest()
     $test_name = "Go to new user form page when user is not already logged in";
     $test_aspects = ["HTTP response code"];
 
-    $get_response = http_GET('user/new_user');
+    $get_response = http_GET('user/new_userr');//////////////////////////
 
     $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
