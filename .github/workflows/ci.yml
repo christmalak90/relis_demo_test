@@ -39,7 +39,7 @@ jobs:
 
       - name: Run Unit test
         run: |
-          response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
+          response=$(php -r "echo 'kkjdfjjkggl';")
           echo "///////////////////////////////////////////////"
           echo "$response"
           if [ "$response" == "successful" ]; then
