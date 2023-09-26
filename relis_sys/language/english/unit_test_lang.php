@@ -1,4 +1,6 @@
 <?php
+//////////////////////////////////////// NEW /////////////////////////////
+
 /**
  * CodeIgniter
  *
@@ -35,14 +37,16 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
+$lang['ut_test_controller'] = 'Controller';
+$lang['ut_test_action'] = 'Action';
 $lang['ut_test_name'] = 'Test name';
-$lang['ut_tested_aspect'] = 'Tested aspect';
+$lang['ut_test_aspect'] = 'Test aspect';
 $lang['ut_test_datatype'] = 'Actual datatype';
-$lang['ut_test_value'] = 'Actual result';////////////////////////////////// NEW ///////////////////////
+$lang['ut_test_value'] = 'Actual result'; ////////////////////////////////// NEW ///////////////////////
 $lang['ut_res_datatype'] = 'Expected datatype';
-$lang['ut_res_value'] = 'Expected result';///////////////////////////////// NEW ////////////////////
+$lang['ut_res_value'] = 'Expected result'; ///////////////////////////////// NEW ////////////////////
 $lang['ut_result'] = 'Status';
 $lang['ut_undefined'] = 'Undefined';
 $lang['ut_file'] = 'File Name';

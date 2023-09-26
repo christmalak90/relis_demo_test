@@ -1,4 +1,6 @@
 <?php
+		//////////////////////////////////////// NEW /////////////////////////////
+
 /**
  * CodeIgniter
  *
@@ -94,8 +96,10 @@ class CI_Unit_test
 	 * @var	array
 	 */
 	protected $_test_items_visible = array(
+		'test_controller',
+		'test_action',
 		'test_name',
-		'tested_aspect',
+		'test_aspect',
 		'test_datatype',
 		'test_value',
 		//////////////////////////////////////// NEW /////////////////////////////
@@ -150,7 +154,7 @@ class CI_Unit_test
 	 * @param	string	$notes
 	 * @return	string
 	 */
-	public function run($test, $expected = TRUE, $test_name = 'undefined', $tested_aspect = 'undefined', $notes = '')
+	public function run($test, $expected = TRUE, $test_name = 'undefined', $test_aspect = 'undefined', $test_controller = 'undefined', $test_action = 'undefined', $notes = '')
 	{
 		if ($this->active === FALSE) {
 			return FALSE;
@@ -167,8 +171,10 @@ class CI_Unit_test
 		$back = $this->_backtrace();
 
 		$report = array(
+			'test_controller' => $test_controller,
+			'test_action' => $test_action,
 			'test_name' => $test_name,
-			'tested_aspect' => $tested_aspect,
+			'test_aspect' => $test_aspect,
 			/////////////////////////////////// NEW /////////////////////
 			'res_datatype' => $extype,
 			'res_value' => $expected,
@@ -312,7 +318,7 @@ class CI_Unit_test
 			foreach ($result as $key => $val) {
 				if (!in_array($key, $this->_test_items_visible)) {
 					continue;
-				} elseif (in_array($key, array('test_name', 'tested_aspect', 'test_datatype', 'test_value', 'res_datatype', 'res_value', 'result'), TRUE)) { //////////////////////////////////// NEW ///////////////////////
+				} elseif (in_array($key, array('test_controller', 'test_action', 'test_name', 'test_aspect', 'test_datatype', 'test_value', 'res_datatype', 'res_value', 'result'), TRUE)) { //////////////////////////////////// NEW ///////////////////////
 					if (FALSE !== ($line = $CI->lang->line(strtolower('ut_' . $val), FALSE))) {
 						$val = $line;
 					}

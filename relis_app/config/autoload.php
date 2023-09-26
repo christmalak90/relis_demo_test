@@ -1,4 +1,6 @@
 <?php
+		//////////////////////////////////////// NEW /////////////////////////////
+
 /* ReLiS - A Tool for conducting systematic literature reviews and mapping studies.
  * Copyright (C) 2018  Eugene Syriani
  *
@@ -112,7 +114,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'file','form','html_bm','bm','html','operations','graph', 'curl', 'statusCode'); ///////////////////////////////// NEW /////////////////////////////////
+$autoload['helper'] = array('url', 'file','form','html_bm','bm','html','operations','graph', 'test/test', 'test/user_unitTest', 'test/project_unitTest', 'test/paper_unitTest', 'test/screening_unitTest', 'test/data_extraction_unitTest', 'test/quality_assessment_unitTest', 'test/element_unitTest', 'test/reporting_unitTest'); ///////////////////////////////// NEW /////////////////////////////////
 
 /*
 | -------------------------------------------------------------------
