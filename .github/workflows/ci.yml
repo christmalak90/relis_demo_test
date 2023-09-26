@@ -41,9 +41,9 @@ jobs:
         run: |
           response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
           
-          if [ $response == "successful" ]; then
+          if [ $response = "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
-          elif [ $response == "failed" ]; then
+          elif [ $response = "failed" ]; then
             echo "The unit test failed. For a detailed report, please access the following URL in your local web browser: http://localhost:8083/test/unit_test/relis_unit_test"
             exit 1
           else
@@ -52,88 +52,3 @@ jobs:
 
       - name: Stop all running Docker Containers
         run: docker stop $(docker ps -q)
-# name: CI
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Code
-#         uses: actions/checkout@v2
-
-#       - name: Set up PHP
-#         uses: shivammathur/setup-php@v2
-#         with:
-#           php-version: 7.1
-
-#       - name: Install Composer Dependencies
-#         run: composer install
-
-#       - name: Run Unit Tests
-#         run: phpunit --configuration path/to/phpunit.xml
-
-#       - name: Check Test Results
-#         run: |
-#           if [ $? -ne 0 ]; then
-#             echo "Tests failed. Pushing code is not allowed."
-#             exit 1
-#           fi
-#         shell: bash
-
-######################################
-# - name: Debug Workspace
-#   run: |
-#     echo "Workspace: $GITHUB_WORKSPACE"
-#     ls -l $GITHUB_WORKSPACE/relis_deployment
-
-# - name: Debug Repository
-#   run: |
-#     echo "Repository: $GITHUB_REPOSITORY"
-#     echo "Branch: $GITHUB_REF"
-#########################################
-
-# - name: Set up Docker
-#   uses: docker/build-push-action@v2
-#   with:
-#     context: $GITHUB_WORKSPACE/relis_deployment/docker
-#     push: false
-
-# - name: Set up Docker
-#   uses: docker/setup-docker@v2
-
-# - name: Stop and Remove Docker Containers
-#   run: docker-compose down
-#   working-directory: $GITHUB_WORKSPACE/relis_deployment
-
-# - name: Clean Up
-#   run: docker rm $(docker ps -a -q)
-
-# #######################################
-# - name: Check if PHP is Installed
-#   run: |
-#     if php -v; then
-#       echo "PHP is installed."
-#     else
-#       echo "PHP is not installed."
-#       exit 1
-#     fi
-#   #######################################
-# - name: Display IP Adress of relis-app
-#   run: |
-#     docker exec relis-app hostname -I
-
-#- name: Display Logs
-#   run: |
-#     #docker exec relis-app cat /u/relis/public_html/relis_app/
-#     echo "List of files in relis_app/logs/:"
-#     docker exec relis-app ls /u/relis/public_html/relis_app/logs/
-#     echo "relis-app logs:"
-#     docker logs relis-app
-#     #echo "Apache logs:"
-#     #docker exec relis-app cat /var/log/apache2/error.log
