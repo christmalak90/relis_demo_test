@@ -114,7 +114,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'file','form','html_bm','bm','html','operations','graph', 'test/test', 'test/user_test', 'test/project', 'test/paper', 'test/screening', 'test/data_extraction', 'test/quality_assessment', 'test/element', 'test/reporting'); ///////////////////////////////// NEW /////////////////////////////////
+$autoload['helper'] = array('url', 'file','form','html_bm','bm','html','operations','graph', 'test/test', 'test/user_test', 'test/project_test', 'test/paper_test', 'test/screening_test', 'test/data_extraction_test', 'test/quality_assessment_test', 'test/element_test', 'test/reporting_test'); ///////////////////////////////// NEW /////////////////////////////////
 
 /*
 | -------------------------------------------------------------------
