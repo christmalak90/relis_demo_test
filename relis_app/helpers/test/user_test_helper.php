@@ -90,7 +90,7 @@ function user_unitTest()
     $test_name = "Submit new user form while all the form fields are empty";
     $test_aspects = ["HTTP response code", "users table last ID"];
 
-    $expected_values[$test_aspects[0]] = 2008 . " " . status_code_description()[2008];
+    $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
     $expected_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
     $get_response = http_POST('user/check_create_user', ['user_name' => '', 'user_mail' => '', 'user_username' => '', 'user_password' => '', 'user_password_validate' => '']);
