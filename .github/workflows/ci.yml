@@ -47,6 +47,7 @@ jobs:
             echo "The unit test failed. For a detailed report, please access the following URL in your local web browser: http://localhost:8083/test/unit_test/relis_unit_test"
             exit 1
           else
+            echo "The unit test has a error"
             exit 1
           fi
 
