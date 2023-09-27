@@ -93,7 +93,7 @@ function user_unitTest()
     $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
     $expected_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    $get_response = http_POST('user/check_create_userr', ['user_name' => '', 'user_mail' => '', 'user_username' => '', 'user_password' => '', 'user_password_validate' => '']);
+    $get_response = http_POST('user/check_create_user', ['user_name' => '', 'user_mail' => '', 'user_username' => '', 'user_password' => '', 'user_password_validate' => '']);
 
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
@@ -106,7 +106,7 @@ function user_unitTest()
      * Description : Submit new user form while all the form fields are correctly filed but the email field is not valid.
      * Scenario : When the user submit the new user form, No data shoud be inserted into the users table
      * Expected HTTP Response Code : 200
-     * Expected users table last ID: the users table last user ID should be the same before and after the test
+     * Expected users table last ID: the users table last user ID should be the same before and after the testyy
      */
     $test_name = "Submit new user form while all the form fields are correctly filed but the email field is not valid";
     $test_aspects = ["HTTP response code", "users table last ID"];
