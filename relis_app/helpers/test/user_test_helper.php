@@ -93,7 +93,7 @@ function user_unitTest()
     $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
     $expected_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    $get_response = http_POST('user/check_create_user', ['user_name' => '', 'user_mail' => '', 'user_username' => '', 'user_password' => '', 'user_password_validate' => '']);
+    $get_response = http_POST('user/check_create_userr', ['user_name' => '', 'user_mail' => '', 'user_username' => '', 'user_password' => '', 'user_password_validate' => '']);
 
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
