@@ -1,5 +1,5 @@
 <?php
-		//////////////////////////////////////// NEW /////////////////////////////
+//////////////////////////////////////// NEW /////////////////////////////
 
 /**
  * CodeIgniter
@@ -410,7 +410,7 @@ class CI_Unit_test
 	{
 		$this->_template = "\n" . '<table style="width:100%; background-color:#f0f5f5; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">{rows}' . "\n</table>"; ////////////////////////////////// NEW ///////////////////////////
 
-		$this->_template_rows = "\n\t<tr>\n\t\t" . '<th style="text-align: left; border-bottom:1px solid #CCC;">{item}</th>'
+		$this->_template_rows = "\n\t<tr>\n\t\t" . '<th style="width:150px; text-align: left; border-bottom:1px solid #CCC; white-space: nowrap;">{item}</th>'
 			. "\n\t\t" . '<td style="border-bottom:1px solid #CCC;">{result}</td>' . "\n\t</tr>";
 	}
 

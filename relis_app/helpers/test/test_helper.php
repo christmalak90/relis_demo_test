@@ -135,10 +135,9 @@ function status_code_description()
     );
 }
 
-function test_unit($controller, $action, $userdata = 0, $test_name, $test_aspects = [], $expected_values = array(), $actual_values = array())
+function test_unit($controller, $action, $test_name, $test_aspects = [], $expected_values = array(), $actual_values = array())
 {
     $ci = get_instance();
-    $ci->session->set_userdata('user_id', $userdata);
 
     foreach ($test_aspects as $aspect) {
         $ci->unit->run($actual_values[$aspect], $expected_values[$aspect], $test_name, $aspect, $controller, $action);

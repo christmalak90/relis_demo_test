@@ -7,6 +7,27 @@ function user_unitTest()
     $ci = get_instance();
     $controller = "User";
 
+    //--------------------- index action --------------------//
+
+    $action = "index";
+
+    /*
+     * Controller : User
+     * Action : index
+     * Description : This test verifies the behavior of the 'index' action.
+     * Scenario : When a user navigate to "user/index" url they should be taken to the ReLiS description page.
+     * Expected HTTP Response Code : 200 (indicating a successful response from the server).
+     */
+    $test_name = "Go to ReLiS description page";
+    $test_aspects = ["HTTP response code"];
+
+    $get_response = http_GET('user/index');
+
+    $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    $actual_values[$test_aspects[0]] = $get_response['status_code'];
+
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
 
     //--------------------- new_user action --------------------//
 
@@ -19,7 +40,6 @@ function user_unitTest()
      * Scenario : When a user is not logged in and clicks the 'create user' link, the user should be directed to the 'new_user' HTML form to create a new user.
      * Expected HTTP Response Code : 200 (indicating a successful response from the server).
      */
-    $userdata = 0;
     $test_name = "Go to new user form page when user is not already logged in";
     $test_aspects = ["HTTP response code"];
 
@@ -28,7 +48,7 @@ function user_unitTest()
     $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
     /*
      * Controller : User
@@ -38,7 +58,6 @@ function user_unitTest()
      * Expected HTTP Response Code : 307 (indicating a temporary Redirect code)
      * Expected URL : home (The expected URL after the user's action)
      */
-    $userdata = 1;
     $test_name = "Go to new user form page when user is already logged in";
     $test_aspects = ["HTTP response code", "Target URL"];
 
@@ -52,7 +71,7 @@ function user_unitTest()
     $url = $matches[1];
     $actual_values[$test_aspects[1]] = $url;
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     //--------------------- check_create_user action --------------------//
@@ -63,12 +82,11 @@ function user_unitTest()
      * Controller : User
      * Action : check_create_user
      * Description : Submit new user form while all the form fields are empty.
-     * Scenario : When a user clicks the create user button, No data shoud be inserted into the users table
+     * Scenario : When the user submit the new user form, No data shoud be inserted into the users table
      * Expected HTTP Response Code : 200
      * Expected users table last ID: the users table last user ID should be the same before and after the test
 
      */
-    $userdata = 0;
     $test_name = "Submit new user form while all the form fields are empty";
     $test_aspects = ["HTTP response code", "users table last ID"];
 
@@ -80,17 +98,16 @@ function user_unitTest()
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
     /*
      * Controller : User
      * Action : check_create_user
      * Description : Submit new user form while all the form fields are correctly filed but the email field is not valid.
-     * Scenario : When a user clicks the create user button, No data shoud be inserted into the users table
+     * Scenario : When the user submit the new user form, No data shoud be inserted into the users table
      * Expected HTTP Response Code : 200
      * Expected users table last ID: the users table last user ID should be the same before and after the test
      */
-    $userdata = 0;
     $test_name = "Submit new user form while all the form fields are correctly filed but the email field is not valid";
     $test_aspects = ["HTTP response code", "users table last ID"];
 
@@ -102,17 +119,16 @@ function user_unitTest()
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
     /*
      * Controller : User
      * Action : check_create_user
      * Description : Submit new user form while all the form fields are correctly filed but the validate password field doesn't match the password field.
-     * Scenario : When a user clicks the create user button, No data shoud be inserted into the users table
+     * Scenario : When the user submit the new user form, No data shoud be inserted into the users table
      * Expected HTTP Response Code : 200
      * Expected users table last id: the users table last user ID should be the same before and after the test
      */
-    $userdata = 0;
     $test_name = "Submit new user form while all the form fields are correctly filed but the validate password field doesn't match the password field";
     $test_aspects = ["HTTP response code", "users table last ID"];
 
@@ -124,18 +140,17 @@ function user_unitTest()
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     /*
      * Controller : User
      * Action : check_create_user
      * Description : Submit new user form while all the form fields are correctly filed but the reCAPTCHA is not checked.
-     * Scenario : When a user clicks the create user button, No data shoud be inserted into the users table
+     * Scenario : When the user submit the new user form, No data shoud be inserted into the users table
      * Expected HTTP Response Code : 200
      * Expected users table last id: the users table last user ID should be the same before and after the test
      */
-    $userdata = 0;
     $test_name = "Submit new user form while all the form fields are correctly filed but the reCAPTCHA is not checked";
     $test_aspects = ["HTTP response code", "users table last ID"];
 
@@ -147,17 +162,17 @@ function user_unitTest()
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
 
     /*
      * Controller : User
      * Action : check_create_user
      * Description : Submit new user form while all the form fields are correctly filed, the reCAPTCHA is checked, but the Username is already used.
-     * Scenario : When a user clicks the create user button, No data shoud be inserted into the users table
+     * Scenario : When the user submit the new user form, No data shoud be inserted into the users table
      * Expected HTTP Response Code : 200
      * Expected users table last id: the users table last user ID should be the same before and after the test
      */
-    $userdata = 0;
     $test_name = "Submit new user form while all the form fields are correctly filed, the reCAPTCHA is checked, but the Username is already used";
     $test_aspects = ["HTTP response code", "users table last ID"];
 
@@ -169,18 +184,17 @@ function user_unitTest()
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
     $actual_values[$test_aspects[1]] = $ci->db->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1")->row_array()['user_id'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
     /*
      * Controller : User
      * Action : check_create_user
      * Description : Submit new user form while all the form fields are correctly filed and the reCAPTCHA is checked.
-     * Scenario : When a user click the create user button, a new user is created in the users table"
+     * Scenario : When the user submit the new user form, a new user is created in the users table"
      * Expected HTTP Response Code : 200
      * Expected inserted user: the user that should be inserted in the users table
      * Expected inserted user confirmation: the user confirmation data that should be inserted in the user_creation table
      */
-    $userdata = 0;
     $test_name = "Submit new user form while all the form fields are correctly filed and the reCAPTCHA is checked";
     $test_aspects = ["HTTP response code", "Created user", "User confirmation"];
 
@@ -206,7 +220,7 @@ function user_unitTest()
     $actual_values[$test_aspects[1]] = json_encode($user_data);
     $actual_values[$test_aspects[2]] = json_encode($user_confirmation_data);
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     //--------------------- validate_user action --------------------//
@@ -226,7 +240,7 @@ function user_unitTest()
     $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
     $actual_values[$test_aspects[0]] = $get_response['status_code'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     //--------------------- check_validation action --------------------//
@@ -257,7 +271,7 @@ function user_unitTest()
     $actual_values[$test_aspects[1]] = $ci->db->query("Select user_state from users WHERE user_id = '" . $user_data['user_id'] . "'")->row_array()['user_state'];
     $actual_values[$test_aspects[2]] = $ci->db->query("Select user_creation_active from user_creation WHERE creation_user_id = " . $user_data['user_id'] . "")->row_array()['user_creation_active'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     /*
@@ -284,7 +298,7 @@ function user_unitTest()
     $actual_values[$test_aspects[1]] = $ci->db->query("Select user_state from users WHERE user_id = '" . $user_data['user_id'] . "'")->row_array()['user_state'];
     $actual_values[$test_aspects[2]] = $ci->db->query("Select user_creation_active from user_creation WHERE creation_user_id = " . $user_data['user_id'] . "")->row_array()['user_creation_active'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     /*
@@ -311,9 +325,185 @@ function user_unitTest()
     $actual_values[$test_aspects[1]] = $ci->db->query("Select user_state from users WHERE user_id = '" . $user_data['user_id'] . "'")->row_array()['user_state'];
     $actual_values[$test_aspects[2]] = $ci->db->query("Select user_creation_active from user_creation WHERE creation_user_id = " . $user_data['user_id'] . "")->row_array()['user_creation_active'];
 
-    test_unit($controller, $action, $userdata, $test_name, $test_aspects, $expected_values, $actual_values);
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 
 
     //--------------------- login action --------------------//
 
+    $action = "login";
+
+    /*
+     * Controller : User
+     * Action : login
+     * Description : This test verifies the behavior of the 'login' action when a user is not already logged in (there is no open user session).
+     * Scenario : When a user is not logged in and clicks the 'Go to ReLiS' link, the user should be directed to the 'login' HTML form.
+     * Expected HTTP Response Code : 200 (indicating a successful response from the server).
+     */
+    $test_name = "Go to login form page when user is not already logged in";
+    $test_aspects = ["HTTP response code"];
+
+    $get_response = http_GET('user/login');
+
+    $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    $actual_values[$test_aspects[0]] = $get_response['status_code'];
+
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+    /*
+     * Controller : User
+     * Action : login
+     * Description : This test verifies the behavior of the 'login' action when a user is already logged in (there is an open user session).
+     * Scenario : When a user is already logged in and clicks the 'Go to ReLiS' link, the user should be redirected to the 'home/index' url to be automatically logged in.
+     * Expected HTTP Response Code : 307 (indicating a temporary Redirect code)
+     * Expected URL : home (The expected URL after the user's action)
+     */
+    $test_name = "Go to login form page when user is already logged in";
+    $test_aspects = ["HTTP response code", "Target URL"];
+
+    $expected_values[$test_aspects[0]] = 307 . " " . status_code_description()[307];
+    $expected_values[$test_aspects[1]] = 'home';
+
+    $get_response = http_GET('user/login', ['Cookie: relis_session=dsqrv2lu49khh5g6gmvsq8pked3vabjt']);
+
+    $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
+    $url = $matches[1];
+    $actual_values[$test_aspects[1]] = $url;
+
+    test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+
+    //--------------------- check_form action --------------------//
+
+    // $action = "check_form";
+
+    // /*
+    //  * Controller : User
+    //  * Action : check_form
+    //  * Description : Submit login form while all the form fields are empty.
+    //  * Scenario : When the user submit the login form, the user should not be logged in
+    //  * Expected HTTP Response Code : 200
+    //  * Expected user session ID: 0
+    //  */
+    // $test_name = "Submit login form while all the form fields are empty";
+    // $test_aspects = ["HTTP response code", "User session ID"];
+
+    // $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    // $expected_values[$test_aspects[1]] = 0;
+
+    // $get_response = http_POST('user/check_form', ['user_username' => '', 'user_password' => '']);
+
+    // $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    // $actual_values[$test_aspects[1]] = $ci->session->userdata('user_id');
+
+    // test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+    // /*
+    //  * Controller : User
+    //  * Action : check_form
+    //  * Description : Submit login form with empty username field and filled password field.
+    //  * Scenario : When the user submit the login form, the user should not be logged in
+    //  * Expected HTTP Response Code : 200
+    //  * Expected user session ID: 0
+    //  */
+    // $test_name = "Submit login form with empty username field and filled password field";
+    // $test_aspects = ["HTTP response code", "User session ID"];
+
+    // $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    // $expected_values[$test_aspects[1]] = 0;
+
+    // $get_response = http_POST('user/check_form', ['user_username' => '', 'user_password' => '123']);
+
+    // $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    // $actual_values[$test_aspects[1]] = $ci->session->userdata('user_id');
+
+    // test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+    // /*
+    //  * Controller : User
+    //  * Action : check_form
+    //  * Description : Submit login form with filled username field and empty password field.
+    //  * Scenario : When the user submit the login form, the user should not be logged in
+    //  * Expected HTTP Response Code : 200
+    //  * Expected user session ID: 0
+    //  */
+    // $test_name = "Submit login form with filled username field and empty password field";
+    // $test_aspects = ["HTTP response code", "User session ID"];
+
+    // $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    // $expected_values[$test_aspects[1]] = 0;
+
+    // $get_response = http_POST('user/check_form', ['user_username' => 'admin', 'user_password' => '']);
+
+    // $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    // $actual_values[$test_aspects[1]] = $ci->session->userdata('user_id');
+
+    // test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+    // /*
+    //  * Controller : User
+    //  * Action : check_form
+    //  * Description : Submit login form with correct username and wrong password.
+    //  * Scenario : When the user submit the login form, the user should not be logged in
+    //  * Expected HTTP Response Code : 200
+    //  * Expected user session ID: 0
+    //  */
+    // $test_name = "Submit login form with correct username and wrong password";
+    // $test_aspects = ["HTTP response code", "User session ID"];
+
+    // $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    // $expected_values[$test_aspects[1]] = 0;
+
+    // $get_response = http_POST('user/check_form', ['user_username' => 'admin', 'user_password' => '111']);
+
+    // $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    // $actual_values[$test_aspects[1]] = $ci->session->userdata('user_id');
+
+    // test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+    // /*
+    //  * Controller : User
+    //  * Action : check_form
+    //  * Description : Submit login form with wrong username and correct password.
+    //  * Scenario : When the user submit the login form, the user should not be logged in
+    //  * Expected HTTP Response Code : 200
+    //  * Expected user session ID: 0
+    //  */
+    // $test_name = "Submit login form with wrong username and correct password";
+    // $test_aspects = ["HTTP response code", "User session ID"];
+
+    // $expected_values[$test_aspects[0]] = 200 . " " . status_code_description()[200];
+    // $expected_values[$test_aspects[1]] = 0;
+
+    // $get_response = http_POST('user/check_form', ['user_username' => 'add', 'user_password' => '123']);
+
+    // $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    // $actual_values[$test_aspects[1]] = $ci->session->userdata('user_id');
+
+    // test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
+
+    // /*
+    //  * Controller : User
+    //  * Action : check_form
+    //  * Description : Submit login form with correct username and correct password.
+    //  * Scenario : When the user submit the login form, the user should be logged in
+    //  * Expected HTTP Response Code : 200
+    //  * Expected user session ID: takes the user_id of the logged in user
+    //  */
+    // $test_name = "Submit login form with correct username and correct password";
+    // $test_aspects = ["HTTP response code", "User session ID", "Target URL"];
+
+    // $expected_values[$test_aspects[0]] = 303 . " " . status_code_description()[303];
+    // $expected_values[$test_aspects[1]] = 1; // user_id of logged in user (admin)
+    // $expected_values[$test_aspects[2]] = 'home';
+
+    // $get_response = http_POST('user/check_form', ['user_username' => 'admin', 'user_password' => '123']);
+
+    // $actual_values[$test_aspects[0]] = $get_response['status_code'];
+    // $actual_values[$test_aspects[1]] = $ci->session->userdata('user_id');
+    // preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
+    // $url = $matches[1];
+    // $actual_values[$test_aspects[2]] = $url;
+
+    // test_unit($controller, $action, $test_name, $test_aspects, $expected_values, $actual_values);
 }

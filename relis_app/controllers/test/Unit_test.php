@@ -34,7 +34,7 @@ class Unit_test extends CI_Controller
         $this->load->library('unit_test');
         $this->unit->use_strict(TRUE);
         //$this->unit->active(FALSE);
-        $this->unit->set_test_items(array('test_controller', 'test_action', 'test_name', 'test_aspect', 'res_value', 'test_value', 'result', 'file', 'line'));
+        $this->unit->set_test_items(array('test_controller', 'test_action', 'test_name', 'test_aspect', 'res_value', 'test_value', 'result'));
         //$this->unit->set_test_items(array('test_controller', 'test_action', 'test_name', 'test_aspect', 'res_datatype', 'res_value', 'test_datatype', 'test_value', 'result', 'file', 'line'));
         //$this->unit->set_template($this->report_template());
     }
