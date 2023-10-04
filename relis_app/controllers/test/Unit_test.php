@@ -26,29 +26,38 @@ if (!defined('BASEPATH'))
 
 class Unit_test extends CI_Controller
 {
-    private $response;
+    private $user_unitTest;
 
     function __construct()
     {
         parent::__construct();
+        $this->load->helper('test/unitTest');
+        $this->load->helper('test/UserUnitTest');
+        // $this->load->helper('test/project_test');
+        // $this->load->helper('test/paper_test');
+        // $this->load->helper('test/screening_test');
+        // $this->load->helper('test/data_extraction_test');
+        // $this->load->helper('test/quality_assessment_test');
+        // $this->load->helper('test/element_test');
+        // $this->load->helper('test/reporting_test');
         $this->load->library('unit_test');
         $this->unit->use_strict(TRUE);
-        //$this->unit->active(FALSE);
         $this->unit->set_test_items(array('test_controller', 'test_action', 'test_name', 'test_aspect', 'res_value', 'test_value', 'result'));
-        //$this->unit->set_test_items(array('test_controller', 'test_action', 'test_name', 'test_aspect', 'res_datatype', 'res_value', 'test_datatype', 'test_value', 'result', 'file', 'line'));
-        //$this->unit->set_template($this->report_template());
+
+
+        $this->user_unitTest = new User_unitTest();
     }
 
     public function relis_unit_test($result = "html_report")
     {
-        user_unitTest();
-        project_unitTest();
-        paper_unitTest();
-        screening_unitTest();
-        data_extraction_unitTest();
-        quality_assessment_unitTest();
-        reporting_unitTest();
-        element_unitTest();
+        $this->user_unitTest->run_tests();
+        // project_unitTest();
+        // paper_unitTest();
+        // screening_unitTest();
+        // data_extraction_unitTest();
+        // quality_assessment_unitTest();
+        // reporting_unitTest();
+        // element_unitTest();
 
 
         if ($result == "html_report") {

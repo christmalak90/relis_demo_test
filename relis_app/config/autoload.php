@@ -1,5 +1,5 @@
 <?php
-		//////////////////////////////////////// NEW /////////////////////////////
+//////////////////////////////////////// NEW /////////////////////////////
 
 /* ReLiS - A Tool for conducting systematic literature reviews and mapping studies.
  * Copyright (C) 2018  Eugene Syriani
@@ -21,7 +21,7 @@
  * 
  *  :Author: Brice Michel Bigendako
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -80,9 +80,22 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','profiler', 'session','table','bm_lib','user_lib','table_ref_lib',
-		'manage_stored_procedure_lib','user_agent','entity_config_lib',
-		'entity_configuration_lib','manager_lib','Entityconf_lib','paper/biblerproxy_lib');
+$autoload['libraries'] = array(
+	'database',
+	'profiler',
+	'session',
+	'table',
+	'bm_lib',
+	'user_lib',
+	'table_ref_lib',
+	'manage_stored_procedure_lib',
+	'user_agent',
+	'entity_config_lib',
+	'entity_configuration_lib',
+	'manager_lib',
+	'Entityconf_lib',
+	'paper/biblerproxy_lib'
+);
 //$autoload['libraries'] = array('database','session','table','bm_lib','table_ref_lib','manage_stored_procedure_lib','user_agent','entity_config_lib','entity_configuration_lib','manager_lib');
 
 /*
@@ -114,7 +127,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'file','form','html_bm','bm','html','operations','graph', 'test/test', 'test/user_test', 'test/project_test', 'test/paper_test', 'test/screening_test', 'test/data_extraction_test', 'test/quality_assessment_test', 'test/element_test', 'test/reporting_test'); ///////////////////////////////// NEW /////////////////////////////////
+$autoload['helper'] = array('url', 'file', 'form', 'html_bm', 'bm', 'html', 'operations', 'graph'); ///////////////////////////////// NEW /////////////////////////////////
 
 /*
 | -------------------------------------------------------------------
@@ -132,7 +145,7 @@ $autoload['config'] = array();
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Language files
+|  Auto-load Language files  
 | -------------------------------------------------------------------
 | Prototype:
 |
@@ -157,4 +170,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('manage_mdl','DBConnection_mdl', 'Paper_dataAccess', 'User_dataAccess', 'Data_extraction_dataAccess', 'Project_dataAccess', 'Quality_assessment_dataAccess', 'Reporting_dataAccess', 'Screening_dataAccess');
+$autoload['model'] = array('manage_mdl', 'DBConnection_mdl', 'Paper_dataAccess', 'User_dataAccess', 'Data_extraction_dataAccess', 'Project_dataAccess', 'Quality_assessment_dataAccess', 'Reporting_dataAccess', 'Screening_dataAccess');
