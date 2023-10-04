@@ -32,19 +32,17 @@ class Unit_test extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('test/christ');
-        $this->load->helper('test/user_test');
+        $this->load->helper('test/bane');
         // $this->load->helper('test/project_test');
         // $this->load->helper('test/paper_test');
         // $this->load->helper('test/screening_test');
         // $this->load->helper('test/data_extraction_test');/
         // $this->load->helper('test/quality_assessment_test');
-        // $this->load->helper('test/element_test');
+        // $this->load->helper('test/element_test');/
         // $this->load->helper('test/reporting_test');
         $this->load->library('unit_test');
         $this->unit->use_strict(TRUE);
         $this->unit->set_test_items(array('test_controller', 'test_action', 'test_name', 'test_aspect', 'res_value', 'test_value', 'result'));
-
-
         $this->user_unitTest = new User_unitTest();
     }
 
