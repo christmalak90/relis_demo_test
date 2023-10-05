@@ -26,6 +26,9 @@ jobs:
 
       - name: Run Unit test
         run: |
+          echo ############deleteTag
+          git tag -d last_successful_commit
+
           echo ############createTag
           git tag last_successful_commit $GITHUB_SHA
 
