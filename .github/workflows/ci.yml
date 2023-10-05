@@ -1,4 +1,3 @@
-############################### NEW ################################
 name: Relis
 
 on:
@@ -44,21 +43,26 @@ jobs:
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
           elif [ "$response" == "failed" ]; then
-            echo "The unit test failed. For a detailed report, please access the following URL in your local web browser: http://localhost:8083/test/unit_test/relis_unit_test"
-            ############################################################
-            last_commit=$(git rev-parse HEAD)
+            echo "The unit test failed. Reverting to the last successful commit."
+            
+            # Retrieve the commit hash from the file
+            last_successful_commit=$(cat successful_commit.txt)
 
-            # Create a revert commit with a predefined message
-            git revert -m 1 $last_commit --no-edit
+            # Reset the branch to the last successful commit
+            git reset --hard $last_successful_commit
 
-            # Push the revert commit to the branch
-            git push
-            ###############################################################
+            # Force push to update the branch on the remote repository
+            git push --force
+
             exit 1
           else
-            echo "The unit test has a error"
+            echo "The unit test has an error"
             exit 1
           fi
 
       - name: Stop all running Docker Containers
         run: docker stop $(docker ps -q)
+
+      - name: Save Successful Commit Hash
+        if: success()
+        run: echo $GITHUB_SHA > successful_commit.txt
