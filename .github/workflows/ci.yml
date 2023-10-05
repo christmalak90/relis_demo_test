@@ -66,5 +66,6 @@ jobs:
       - name: Save Successful Commit Hash
         if: success()
         run: |
-          echo $GITHUB_WORKSPACE
+          echo $GITHUB_WORKSPACE########################################
+          cat $GITHUB_WORKSPACE/successful_commit.txt##############################
           echo $GITHUB_SHA > $GITHUB_WORKSPACE/successful_commit.txt
