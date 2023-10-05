@@ -26,6 +26,9 @@ jobs:
 
       - name: Run Unit test
         run: |
+          echo ############fetchTag
+          git fetch --tags
+
           echo ############deleteTag
           git tag -d last_successful_commit
 
