@@ -26,13 +26,20 @@ jobs:
 
       - name: Run Unit test
         run: |
-          git tag successful $GITHUB_SHA
+          git tag last_successful_commit $GITHUB_SHA
           # echo $GITHUB_SHA > successful_commit.txt
           # git config user.email $GITHUB_ACTOR
           # git config user.name $GITHUB_ACTOR
           # git add -f successful_commit.txt
           # git commit -m $GITHUB_SHA
           # git push origin main
+
+          git push origin last_successful_commit
+          git fetch --tags
+          git show last_successful_commit
+
+
+
 
 ###
       # - name: Build Docker Image
