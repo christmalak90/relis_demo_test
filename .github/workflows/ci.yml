@@ -45,6 +45,15 @@ jobs:
             echo "The unit test passed. Proceeding with the workflow."
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. For a detailed report, please access the following URL in your local web browser: http://localhost:8083/test/unit_test/relis_unit_test"
+            ############################################################
+            last_commit=$(git rev-parse HEAD)
+
+            # Create a revert commit with a predefined message
+            git revert -m 1 $last_commit --no-edit
+
+            # Push the revert commit to the branch
+            git push
+            ###############################################################
             exit 1
           else
             echo "The unit test has a error"
