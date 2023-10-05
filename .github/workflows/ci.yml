@@ -26,30 +26,24 @@ jobs:
 
       - name: Run Unit test
         run: |
-          echo ############fetchTag
-          git fetch --tags
+          echo success
+          echo $GITHUB_SHA > successful_commit.txt
+          git config user.email $GITHUB_ACTOR
+          git config user.name $GITHUB_ACTOR
+          git add -f successful_commit.txt
+          git commit -m $GITHUB_SHA
+          git push origin main
 
-          echo ############deleteTag
-          git tag -d last_successful_commit
+          # echo fail
+          # # Retrieve the commit hash from the file
+          # last_successful_commit=$(cat successful_commit.txt)
+          
+          # # Reset the branch to the last successful commit
+          # git reset --hard $last_successful_commit
 
-          echo ############createTag
-          git tag last_successful_commit $GITHUB_SHA
+          # # Force push to update the branch on the remote repository
+          # git push --force
 
-          # echo $GITHUB_SHA > successful_commit.txt
-          # git config user.email $GITHUB_ACTOR
-          # git config user.name $GITHUB_ACTOR
-          # git add -f successful_commit.txt
-          # git commit -m $GITHUB_SHA
-          # git push origin main
-
-          echo ############pushTag
-          git push origin last_successful_commit
-
-          echo ############fetchTag
-          git fetch --tags
-
-          echo ############showTag
-          git show last_successful_commit
 
 
 
