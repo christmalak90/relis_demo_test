@@ -22,21 +22,6 @@ jobs:
             echo "Docker is not installed, please install Docker in your Github Repository."
           fi
 
-      - name: Build Docker Image
-        run: docker-compose build
-        working-directory: relis_deployment
-
-      - name: Run Docker Containers
-        run: docker-compose up -d
-        working-directory: relis_deployment
-
-      - name: Wait for Application to Start
-        run: sleep 10
-
-      - name: Set relis-app Container permission
-        run: |
-          docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
-
       - name: Run Unit test
         run: |
           response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
@@ -44,26 +29,51 @@ jobs:
 
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
-            echo $GITHUB_SHA > $GITHUB_WORKSPACE/workspace/successful_commit.txt
+            echo $GITHUB_WORKSPACE
+            #echo $GITHUB_SHA > successful_commit.txt
 
-          elif [ "$response" == "failed" ]; then
-            echo "The unit test failed. Reverting to the last successful commit."
+      # - name: Build Docker Image
+      #   run: docker-compose build
+      #   working-directory: relis_deployment
 
-            # Retrieve the commit hash from the file
-            last_successful_commit=$(cat $GITHUB_WORKSPACE/workspace/successful_commit.txt)
+      # - name: Run Docker Containers
+      #   run: docker-compose up -d
+      #   working-directory: relis_deployment
 
-            # Reset the branch to the last successful commit
-            git reset --hard $last_successful_commit
+      # - name: Wait for Application to Start
+      #   run: sleep 10
 
-            # Force push to update the branch on the remote repository
-            git push --force
+      # - name: Set relis-app Container permission
+      #   run: |
+      #     docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
 
-            exit 1
-            
-          else
-            echo "The unit test has an error"
-            exit 1
-          fi
+      # - name: Run Unit test
+      #   run: |
+      #     response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
+      #     echo $response
+    
+      #     if [ "$response" == "successful" ]; then
+      #       echo "The unit test passed. Proceeding with the workflow."
+      #       echo $GITHUB_SHA > successful_commit.txt
 
-      - name: Stop all running Docker Containers
-        run: docker stop $(docker ps -q)
+      #     elif [ "$response" == "failed" ]; then
+      #       echo "The unit test failed. Reverting to the last successful commit."
+
+      #       # Retrieve the commit hash from the file
+      #       last_successful_commit=$(cat successful_commit.txt)
+
+      #       # Reset the branch to the last successful commit
+      #       git reset --hard $last_successful_commit
+
+      #       # Force push to update the branch on the remote repository
+      #       git push --force
+
+      #       exit 1
+
+      #     else
+      #       echo "The unit test has an error"
+      #       exit 1
+      #     fi
+
+      # - name: Stop all running Docker Containers
+      #   run: docker stop $(docker ps -q)
