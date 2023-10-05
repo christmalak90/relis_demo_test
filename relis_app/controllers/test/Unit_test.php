@@ -38,7 +38,7 @@ class Unit_test extends CI_Controller
         // $this->load->helper('test/screening_test');
         // $this->load->helper('test/data_extraction_test');/
         // $this->load->helper('test/quality_assessment_test');
-        // $this->load->helper('test/element_test');/
+        // $this->load->helper('test/element_test');///////////////////////////////
         // $this->load->helper('test/reporting_test');
         $this->load->library('unit_test');
         $this->unit->use_strict(TRUE);
