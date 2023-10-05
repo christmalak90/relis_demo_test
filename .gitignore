@@ -195,6 +195,5 @@ phpmyadmin/tmp/*
 *.sublime-project
 
 workspace/
-
 successful_commit.txt
 
