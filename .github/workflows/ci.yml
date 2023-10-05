@@ -28,6 +28,9 @@ jobs:
           git add successful_commit.txt
           git commit -m $GITHUB_SHA
           git push origin main
+          
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
       # - name: Build Docker Image
