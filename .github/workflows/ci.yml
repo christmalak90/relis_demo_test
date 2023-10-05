@@ -25,8 +25,8 @@ jobs:
       - name: Run Unit test
         run: |
           echo $GITHUB_SHA > successful_commit.txt
-          #git config --global user.email "christ.malak@gmail.com"
-          #git config --global user.name "Your Name"
+          git config --global user.email "christ.malak@gmail.com"
+          git config --global user.name $GITHUB_ACTOR
           git add successful_commit.txt
           git commit -m $GITHUB_SHA
           git push origin main
