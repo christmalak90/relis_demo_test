@@ -46,7 +46,7 @@ jobs:
             echo "The unit test failed. Reverting to the last successful commit."
             
             # Retrieve the commit hash from the file
-            last_successful_commit=$(cat successful_commit.txt)
+            last_successful_commit=$(cat $GITHUB_WORKSPACE/successful_commit.txt)
 
             # Reset the branch to the last successful commit
             git reset --hard $last_successful_commit
@@ -65,4 +65,6 @@ jobs:
 
       - name: Save Successful Commit Hash
         if: success()
-        run: echo $GITHUB_SHA > successful_commit.txt
+        run: |
+          echo $GITHUB_WORKSPACE
+          echo $GITHUB_SHA > $GITHUB_WORKSPACE/successful_commit.txt
