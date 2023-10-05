@@ -29,7 +29,7 @@ jobs:
           echo $GITHUB_SHA > successful_commit.txt
           git config user.email $GITHUB_ACTOR
           git config user.name $GITHUB_ACTOR
-          git add successful_commit.txt
+          git add -f successful_commit.txt
           git commit -m $GITHUB_SHA
           git push origin main
 
