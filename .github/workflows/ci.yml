@@ -1,10 +1,12 @@
 ############################### NEW ################################
 name: Relis
 
-on:
+on: 
   push:
     branches:
       - main
+permissions:
+  contents: write
 
 jobs:
   relis_unit_testing:
