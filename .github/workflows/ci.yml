@@ -35,6 +35,8 @@ jobs:
           # git push origin main
 
           echo fail
+          git config user.email $GITHUB_ACTOR
+          git config user.name $GITHUB_ACTOR
           # Retrieve the commit hash from the file
           last_successful_commit=$(cat successful_commit.txt)
           
