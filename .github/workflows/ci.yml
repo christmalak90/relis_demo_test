@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          repository: https://github.com/$GITHUB_ACTOR/relis_demo_test.git
 
       - name: Check if Docker is installed
         run: |
@@ -41,7 +43,7 @@ jobs:
           last_successful_commit=$(cat successful_commit.txt)
           
           # Reset the branch to the last successful commit
-          git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
+          #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
           git reset --hard HEAD~
           # git revert -n $last_successful_commit
           # git commit -m "Revert"
