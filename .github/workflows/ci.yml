@@ -13,13 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set Git URL
-        run: echo "REPO_URL=https://github.com/$GITHUB_ACTOR/relis_demo_test.git" >> $GITHUB_ENV
-
-      - name: Clone Repository
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.REPO_URL }}
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
       - name: Check if Docker is installed
         run: |
