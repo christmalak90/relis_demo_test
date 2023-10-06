@@ -45,7 +45,8 @@ jobs:
           #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
           #git reset --hard -- b91127550d6c2431f70bdd6d77bee87fb7669cc5
 
-          git fsck
+          git prune
+          git fetch
           git revert -X theirs --no-edit b91127550d6c2431f70bdd6d77bee87fb7669cc5
           # git commit -m "Revert"
 
