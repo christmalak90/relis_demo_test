@@ -47,7 +47,7 @@ jobs:
 
           git fetch --unshallow
           #git log --pretty=format:%H
-          git revert -X theirs --no-edit b91127550d6c2431f70bdd6d77bee87fb7669cc5
+          git revert -X theirs --no-edit 72de205
           # git commit -m "Revert"
 
           # Force push to update the branch on the remote repository
