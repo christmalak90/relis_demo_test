@@ -42,7 +42,7 @@ jobs:
           
           # Reset the branch to the last successful commit
           git status
-          git reset --hard 977079e05b126b8b862181dadf2b13328e8edfe1
+          git reset --hard 07994d1
           # git revert -n $last_successful_commit
           # git commit -m "Revert"
 
