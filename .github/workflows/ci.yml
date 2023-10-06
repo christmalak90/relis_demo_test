@@ -41,10 +41,10 @@ jobs:
           # Reset the branch to the last successful commit
           # git reset --hard $last_successful_commit
           git revert -n $last_successful_commit
-          git commit -m "Revert7"
+          git commit -m "Revert"
 
           # Force push to update the branch on the remote repository
-          # # git push --force
+          # git push --force
           git push origin main
 
           # # echo $GITHUB_SHA > successful_commit.txt
