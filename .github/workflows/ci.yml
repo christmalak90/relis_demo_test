@@ -39,13 +39,13 @@ jobs:
           last_successful_commit=$(cat successful_commit.txt)
           
           # Reset the branch to the last successful commit
-          # git reset --hard $last_successful_commit
-          git revert -n $last_successful_commit
-          git commit -m "Revert"
+          git reset --hard 977079e0
+          # git revert -n $last_successful_commit
+          # git commit -m "Revert"
 
           # Force push to update the branch on the remote repository
-          # git push --force
-          git push origin main
+          git push --force
+          # git push origin main
 
           # # echo $GITHUB_SHA > successful_commit.txt
           # # git config user.email $GITHUB_ACTOR
