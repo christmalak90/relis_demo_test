@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Check if Docker is installed
         run: |
@@ -41,6 +41,7 @@ jobs:
           last_successful_commit=$(cat successful_commit.txt)
           
           # Reset the branch to the last successful commit
+          git fetch
           git reset --hard 977079e05b126b8b862181dadf2b13328e8edfe1
           # git revert -n $last_successful_commit
           # git commit -m "Revert"
