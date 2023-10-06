@@ -46,7 +46,7 @@ jobs:
           #git reset --hard -- b91127550d6c2431f70bdd6d77bee87fb7669cc5
 
           git fetch --unshallow
-          git log --pretty=format:%H
+          #git log --pretty=format:%H
           git revert -X theirs --no-edit b91127550d6c2431f70bdd6d77bee87fb7669cc5
           # git commit -m "Revert"
 
