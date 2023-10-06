@@ -45,13 +45,13 @@ jobs:
           #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
           #git reset --hard -- b91127550d6c2431f70bdd6d77bee87fb7669cc5
 
-          echo git rev-list -n 1 b91127550d6c2431f70bdd6d77bee87fb7669cc5 
-          git revert -X theirs --no-edit b91127550d6c2431f70bdd6d77bee87fb7669cc5
+          git rev-list -n 1 b91127550d6c2431f70bdd6d77bee87fb7669cc5 
+          #git revert -X theirs --no-edit b91127550d6c2431f70bdd6d77bee87fb7669cc5
           # git commit -m "Revert"
 
           # Force push to update the branch on the remote repository
           #git push --force
-          git push origin main
+          #git push origin main
 
           # # echo $GITHUB_SHA > successful_commit.txt
           # # git config user.email $GITHUB_ACTOR
