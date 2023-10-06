@@ -43,7 +43,7 @@ jobs:
         
           # Reset the branch to the last successful commit
           #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
-          git reset --hard -- b91127550d6c2431f70bdd6d77bee87fb7669cc5
+          git reset --hard
 
           # git revert -n $last_successful_commit
           # git commit -m "Revert"
