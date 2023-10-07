@@ -1,5 +1,5 @@
 ############################### NEW ################################
-name: Relis
+name: Relis unit test
 
 on:
   push:
@@ -7,18 +7,7 @@ on:
       - main
 
 permissions:
-  actions: write
   contents: write
-  checks: write
-  deployments: write
-  discussions: write
-  issues: write
-  packages: write
-  pages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
 
 jobs:
   relis_unit_testing:
@@ -38,18 +27,12 @@ jobs:
 
       - name: Run Unit test
         run: |
-          git --version
-          echo success
-          #echo $GITHUB_SHA > successful_commit.txt
+          echo $GITHUB_SHA > successful_commit.txt
           git config user.email $GITHUB_ACTOR
           git config user.name $GITHUB_ACTOR
-          # Replace 'example-line' with the new content
-          sed -i 's/example-line/new-content/' .github/workflows/ci.yml
-          #git add -f successful_commit.txt
-          git add --all
+          git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
-          git push origin main
-          echo example-line
+          git push
 
           # echo $GITHUB_EVENT_NAME
           # echo fail

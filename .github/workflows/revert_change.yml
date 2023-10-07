@@ -1,0 +1,30 @@
+############################### NEW ################################
+
+name: Revert change
+
+on:
+  workflow_run:
+    workflows: [Relis unit test]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  revert_change:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Revert change
+        run: |
+          git config user.email $GITHUB_ACTOR
+          git config user.name $GITHUB_ACTOR
+          sed -i 's/example-line/new-content/' .github/workflows/ci.yml
+          git add --all
+          git commit -m $GITHUB_SHA
+          git push origin main
+          echo example-line
