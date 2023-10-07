@@ -1,12 +1,16 @@
 ############################### NEW ################################
 name: Relis
 
-on: 
+on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     branches:
       - main
-# permissions:
-#   contents: write
+
+permissions:
+  contents: write
 
 jobs:
   relis_unit_testing:
