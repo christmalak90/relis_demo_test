@@ -1,8 +1,8 @@
 ############################### NEW ################################
 name: Relis
 
-on:
-  push:
+on: 
+  workflow_dispatch:
     branches:
       - main
 # permissions:
