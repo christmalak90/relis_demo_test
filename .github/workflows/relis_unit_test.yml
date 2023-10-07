@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        # with:
+        ## with:
         #   token: ${{ secrets.RELIS_TOKEN }}
       
       - name: Check if Docker is installed
