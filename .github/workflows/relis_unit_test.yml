@@ -46,7 +46,7 @@ jobs:
           git config user.name $GITHUB_ACTOR
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
-          git push
+          git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git main
         
           
           ## echo example-line
