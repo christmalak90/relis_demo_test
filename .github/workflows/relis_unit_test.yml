@@ -28,6 +28,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Check token scopes
+        run: "curl -I -H \"Authorization: token ${{ secrets.RELIS_TOKEN }}\" https://api.github.com/users/christmalak90"
+      
       - name: Check if Docker is installed
         run: |
           if docker --version; then
