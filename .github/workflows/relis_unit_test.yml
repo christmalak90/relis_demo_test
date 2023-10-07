@@ -40,10 +40,10 @@ jobs:
 
       - name: Run Unit test
         run: |
-          echo $GITHUB_SHA > .github/workflows/successful_commit.txt
+          echo $GITHUB_SHA > .github/workflows/last_successful_commit.txt
           git config user.email $GITHUB_ACTOR
           git config user.name $GITHUB_ACTOR
-          git add -f .github/workflows/successful_commit.txt
+          git add -f .github/workflows/last_successful_commit.txt
           git commit -m $GITHUB_SHA
           git push
         
@@ -54,7 +54,7 @@ jobs:
           # git config user.email $GITHUB_ACTOR
           # git config user.name $GITHUB_ACTOR
           # # Retrieve the commit hash from the file
-          # last_successful_commit=$(cat successful_commit.txt)
+          # last_successful_commit=$(cat last_successful_commit.txt)
         
           # # Reset the branch to the last successful commit
           # #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
@@ -69,10 +69,10 @@ jobs:
           # #git push --force
           # git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git main
 
-          # # # echo $GITHUB_SHA > successful_commit.txt
+          # # # echo $GITHUB_SHA > last_successful_commit.txt
           # # # git config user.email $GITHUB_ACTOR
           # # # git config user.name $GITHUB_ACTOR
-          # # # git add -f successful_commit.txt
+          # # # git add -f last_successful_commit.txt
           # # # git commit -m $GITHUB_SHA
           # # # git push origin main
 
@@ -109,13 +109,13 @@ jobs:
 
 #     if [ "$response" == "successful" ]; then
 #       echo "The unit test passed. Proceeding with the workflow."
-#       echo $GITHUB_SHA > successful_commit.txt
+#       echo $GITHUB_SHA > last_successful_commit.txt
 
 #     elif [ "$response" == "failed" ]; then
 #       echo "The unit test failed. Reverting to the last successful commit."
 
 #       # Retrieve the commit hash from the file
-#       last_successful_commit=$(cat successful_commit.txt)
+#       last_successful_commit=$(cat last_successful_commit.txt)
 
 #       # Reset the branch to the last successful commit
 #       git reset --hard $last_successful_commit
