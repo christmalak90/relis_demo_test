@@ -54,7 +54,7 @@ jobs:
           # git config user.email $GITHUB_ACTOR
           # git config user.name $GITHUB_ACTOR
           # # Retrieve the commit hash from the file
-          # last_successful_commit=$(cat last_successful_commit.txt)
+          ## last_successful_commit=$(cat last_successful_commit.txt)
         
           # # Reset the branch to the last successful commit
           # #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
