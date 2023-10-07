@@ -39,13 +39,15 @@ jobs:
           fi
 
       - name: Run Unit test
+        env:
+          RELIS_TOKEN: ${{ secrets.RELIS_TOKEN }}
         run: |
           echo $GITHUB_SHA > .github/workflows/successful_commit.txt
           git config user.email $GITHUB_ACTOR
           git config user.name $GITHUB_ACTOR
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
-          git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git main
+          git push https://$RELIS_TOKEN@github.com/$GITHUB_REPOSITORY.git main
         
           
           ## echo example-line
