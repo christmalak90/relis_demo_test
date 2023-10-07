@@ -50,9 +50,6 @@ jobs:
           git commit -m $GITHUB_SHA
           git push origin main
           echo example-line
-        env:
-          RELIS_TOKEN: ${{ secrets.RELIS_TOKEN }}
-
 
           # echo $GITHUB_EVENT_NAME
           # echo fail
