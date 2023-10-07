@@ -6,8 +6,19 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
+permissions: write-all
+  # actions: write
+  # contents: write
+  # checks: write
+  # deployments: write
+  # discussions: write
+  # issues: write
+  # packages: write
+  # pages: write
+  # pull-requests: write
+  # repository-projects: write
+  # security-events: write
+  # statuses: write
 
 jobs:
   relis_unit_testing:
@@ -33,7 +44,7 @@ jobs:
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
           git push
-
+          
           # echo example-line
           # echo $GITHUB_EVENT_NAME
           # echo fail
