@@ -38,6 +38,7 @@ jobs:
           # Replace 'example-line' with the new content
           sed -i 's/example-line/new-content/' successful_commit.txt
           #git add -f successful_commit.txt
+          git add --all
           git commit -m $GITHUB_SHA
           git push origin main
           echo example-line
