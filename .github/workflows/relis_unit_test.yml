@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check if Docker is installed
         run: |
@@ -44,8 +46,7 @@ jobs:
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
           git push
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        
           
           # echo example-line
           # echo $GITHUB_EVENT_NAME
