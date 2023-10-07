@@ -39,41 +39,42 @@ jobs:
           # git commit -m $GITHUB_SHA
           # git push origin main
 
-          echo fail
-          git config user.email $GITHUB_ACTOR
-          git config user.name $GITHUB_ACTOR
-          # Retrieve the commit hash from the file
-          last_successful_commit=$(cat successful_commit.txt)
+          # echo $GITHUB_EVENT_NAME
+          # echo fail
+          # git config user.email $GITHUB_ACTOR
+          # git config user.name $GITHUB_ACTOR
+          # # Retrieve the commit hash from the file
+          # last_successful_commit=$(cat successful_commit.txt)
         
-          # Reset the branch to the last successful commit
-          #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
-          #git reset --hard -- b91127550d6c2431f70bdd6d77bee87fb7669cc5
+          # # Reset the branch to the last successful commit
+          # #git clone https://github.com/$GITHUB_ACTOR/relis_demo_test.git
+          # #git reset --hard -- b91127550d6c2431f70bdd6d77bee87fb7669cc5
 
-          git fetch --unshallow
-          #git log --pretty=format:%H
-          git revert -X theirs --no-edit 72de205
-          # git commit -m "Revert"
+          # git fetch --unshallow
+          # #git log --pretty=format:%H
+          # git revert -X theirs --no-edit 72de205
+          # # git commit -m "Revert"
 
-          # Force push to update the branch on the remote repository
-          #git push --force
-          git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git main
+          # # Force push to update the branch on the remote repository
+          # #git push --force
+          # git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git main
 
-          # # echo $GITHUB_SHA > successful_commit.txt
-          # # git config user.email $GITHUB_ACTOR
-          # # git config user.name $GITHUB_ACTOR
-          # # git add -f successful_commit.txt
-          # # git commit -m $GITHUB_SHA
-          # # git push origin main
+          # # # echo $GITHUB_SHA > successful_commit.txt
+          # # # git config user.email $GITHUB_ACTOR
+          # # # git config user.name $GITHUB_ACTOR
+          # # # git add -f successful_commit.txt
+          # # # git commit -m $GITHUB_SHA
+          # # # git push origin main
 
-          # echo ############pushTag
-          # git push origin last_successful_commit
+          # # echo ############pushTag
+          # # git push origin last_successful_commit
 
-          # echo ############fetchTag
-          # git fetch --tags
+          # # echo ############fetchTag
+          # # git fetch --tags
 
-          # echo ############showTag
-          # git show last_successful_commit
-          # 3200e6ab353824bbc3919236ee432b78598afbb3
+          # # echo ############showTag
+          # # git show last_successful_commit
+          # # 3200e6ab353824bbc3919236ee432b78598afbb3
 
 ###
 # - name: Build Docker Image
