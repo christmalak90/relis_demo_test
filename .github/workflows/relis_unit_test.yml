@@ -28,11 +28,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          # Provide a Personal Access Token (PAT) with the "repo" scope
           token: ${{ secrets.RELIS_TOKEN }}
-
-      - name: Check token scopes
-        run: "curl -I -H \"Authorization: token ${{ secrets.RELIS_TOKEN }}\" https://api.github.com/users/christmalak90"
       
       - name: Check if Docker is installed
         run: |
@@ -45,8 +41,8 @@ jobs:
       - name: Run Unit test
         run: |
           echo $GITHUB_SHA > .github/workflows/successful_commit.txt
-          git config user.email $GITHUB_ACTOR
-          git config user.name $GITHUB_ACTOR
+          # git config user.email $GITHUB_ACTOR
+          # git config user.name $GITHUB_ACTOR
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
           git push
