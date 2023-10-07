@@ -31,14 +31,16 @@ jobs:
       - name: Run Unit test
         run: |
           git --version
-          # echo success
-          # echo $GITHUB_SHA > successful_commit.txt
-          # git config user.email $GITHUB_ACTOR
-          # git config user.name $GITHUB_ACTOR
-          # git add -f successful_commit.txt
-          # git commit -m $GITHUB_SHA
-          # git push origin main
-
+          echo success
+          #echo $GITHUB_SHA > successful_commit.txt
+          git config user.email $GITHUB_ACTOR
+          git config user.name $GITHUB_ACTOR
+          # Replace 'example-line' with the new content
+          sed -i 's/example-line/new-content/' successful_commit.txt
+          #git add -f successful_commit.txt
+          git commit -m $GITHUB_SHA
+          git push origin main
+          echo example-line
           # echo $GITHUB_EVENT_NAME
           # echo fail
           # git config user.email $GITHUB_ACTOR
