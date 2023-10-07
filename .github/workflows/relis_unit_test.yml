@@ -69,7 +69,7 @@ jobs:
 
           # # Force push to update the branch on the remote repository
           # #git push --force
-          # git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git main
+          # git push https://${{ secrets.RELIS_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
 
           # # # echo $GITHUB_SHA > successful_commit.txt
           # # # git config user.email $GITHUB_ACTOR
