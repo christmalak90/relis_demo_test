@@ -41,10 +41,10 @@ jobs:
           echo $GITHUB_SHA > .github/workflows/successful_commit.txt
           git config user.email $GITHUB_ACTOR
           git config user.name $GITHUB_ACTOR
-          git config user.password Cm9010Mc
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
-          git push
+          git push https://$GITHUB_ACTOR:Cm9010Mc@github.com/$GITHUB_ACTOR/$GITHUB_REPOSITORY.git
+
           
           # echo example-line
           # echo $GITHUB_EVENT_NAME
