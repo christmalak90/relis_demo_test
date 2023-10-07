@@ -27,8 +27,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        # with:
-        #   token: ${{ secrets.RELIS_TOKEN }}
+        with:
+          token: ${{ secrets.RELIS_TOKEN }}
       
       - name: Check if Docker is installed
         run: |
@@ -47,10 +47,10 @@ jobs:
           git config user.name $GITHUB_ACTOR
           git add -f .github/workflows/successful_commit.txt
           git commit -m $GITHUB_SHA
-          git remote set-url --push origin https://$GITHUB_ACTOR:$RELIS_TOKEN@github.com/$GITHUB_REPOSITORY.git
           git push
-        
-          
+
+
+          #git remote set-url --push origin https://$GITHUB_ACTOR:$RELIS_TOKEN@github.com/$GITHUB_REPOSITORY.git         
           ## echo example-line
           # echo $GITHUB_EVENT_NAME
           # echo fail
