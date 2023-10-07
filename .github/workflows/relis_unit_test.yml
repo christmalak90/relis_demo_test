@@ -39,6 +39,7 @@ jobs:
       - name: Run Unit test
         run: |
           echo $GITHUB_SHA > .github/workflows/successful_commit.txt
+          git config --global credential.helper store
           git config user.email $GITHUB_ACTOR
           git config user.name $GITHUB_ACTOR
           git add -f .github/workflows/successful_commit.txt
