@@ -81,7 +81,7 @@ jobs:
             last_successful_commit=$(cat last_successful_commit.txt)
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
-            #git fetch --unshallow
+            git fetch --unshallow
 
             #git status
             # git revert -X theirs --no-edit $last_successful_commit
