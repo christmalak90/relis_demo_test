@@ -72,7 +72,6 @@ jobs:
             echo $GITHUB_SHA > last_successful_commit.txt
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
-            git status
             git add -f last_successful_commit.txt
             git commit -m "Update last successful commit $GITHUB_SHA"
             git push
