@@ -74,8 +74,8 @@ jobs:
             git config user.name $GITHUB_ACTOR
             git add -f last_successful_commit.txt
             git commit -m "Update last successful commit $GITHUB_SHA"
-            git status
             git push
+            git status
 
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes to the last successful commit."
