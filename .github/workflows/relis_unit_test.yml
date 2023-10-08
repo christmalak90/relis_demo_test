@@ -64,7 +64,7 @@ jobs:
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
             git add -f last_successful_commit.txt
-            git commit -m $GITHUB_SHA
+            git commit -m 'Update last successful commit $GITHUB_SHA'
             git push
 
           elif [ "$response" == "failed" ]; then
