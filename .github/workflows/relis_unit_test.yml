@@ -82,8 +82,10 @@ jobs:
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
             git fetch --unshallow
-            git revert -X theirs --no-edit $last_successful_commit
-            git push
+
+            git status
+            # git revert -X theirs --no-edit $last_successful_commit
+            # git push
             exit 1
 
           else
