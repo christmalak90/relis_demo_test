@@ -55,14 +55,14 @@ jobs:
 
       - name: Run Unit test
         run: |
-          function revert_changes() {
-            last_successful_commit=$(cat last_successful_commit.txt)
-            git config user.email $GITHUB_ACTOR
-            git config user.name $GITHUB_ACTOR
-            git fetch --unshallow
-            git revert -X theirs --no-edit $last_successful_commit
-            git push
-          }
+          # function revert_changes() {
+          #   last_successful_commit=$(cat last_successful_commit.txt)
+          #   git config user.email $GITHUB_ACTOR
+          #   git config user.name $GITHUB_ACTOR
+          #   git fetch --unshallow
+          #   git revert -X theirs --no-edit $last_successful_commit
+          #   git push
+          # }
 
           response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
           echo $response
@@ -78,7 +78,12 @@ jobs:
 
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes to the last successful commit."
-            revert_changes
+            last_successful_commit=$(cat last_successful_commit.txt)
+            git config user.email $GITHUB_ACTOR
+            git config user.name $GITHUB_ACTOR
+            git fetch --unshallow
+            git revert -X theirs --no-edit $last_successful_commit
+            git push
             exit 1
 
           else
