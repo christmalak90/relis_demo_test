@@ -83,7 +83,7 @@ jobs:
             git config user.name $GITHUB_ACTOR
             git restore .
             git fetch --unshallow
-            git revert -X ours --no-edit $last_successful_commit
+            git revert -X theirs --no-edit $last_successful_commit
             git push
             exit 1
 
