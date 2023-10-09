@@ -77,7 +77,8 @@ jobs:
             
             if git show-ref --tags --quiet "refs/tags/last_successful_commit"; then
               git push --delete origin last_successful_commit
-              
+            fi
+
             git push origin last_successful_commit
               # git commit -m "Update last successful commit $GITHUB_SHA"
               # git push
