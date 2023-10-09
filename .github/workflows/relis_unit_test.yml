@@ -85,9 +85,9 @@ jobs:
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
             git restore .
-            git revert -X theirs --no-edit $commit_hash
+            git revert -X ours --no-edit $commit_hash
             git push
-            
+
             exit 1
 
           else
