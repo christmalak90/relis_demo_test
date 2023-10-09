@@ -75,7 +75,7 @@ jobs:
             git config user.name $GITHUB_ACTOR
               # git add -f last_successful_commit.txt
             
-            if git show-ref --tags --quiet "refs/tags/last_successful_commit"; then
+            if git ls-remote --tags origin | grep -q "refs/tags/last_successful_commit"; then
               git push --delete origin last_successful_commit
             fi
 
