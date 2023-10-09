@@ -78,8 +78,16 @@ jobs:
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes to the last successful commit."
             git fetch --unshallow
-            git reset --hard last_successful_commit
-            git push --force
+                  # git reset --hard last_successful_commit
+                  # git push --force
+
+            commit_hash=$(git rev-list -n 1 last_successful_commit)
+            git config user.email $GITHUB_ACTOR
+            git config user.name $GITHUB_ACTOR
+            git restore .
+            git revert -X theirs --no-edit $commit_hash
+            git push
+            
             exit 1
 
           else
