@@ -55,37 +55,19 @@ jobs:
           
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
-                  # git tag last_successful_commit $GITHUB_SHA
-                  # if git ls-remote --tags origin | grep -q "refs/tags/last_successful_commit"; then
-                  #   git push --delete origin last_successful_commit
-                  # fi
-                  # git push origin last_successful_commit
 
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes"
-                  # git fetch --unshallow
-                  # git reset --hard last_successful_commit
-                  # git push --force
-                  # commit_hash=$(git rev-list -n 1 last_successful_commit)
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
             # git restore .
             git stash
-                  # git revert -X theirs --no-edit $commit_hash
-                  # git revert -X theirs --no-edit <revert_commit_hash>
-                  # git push --force
             # git revert -X theirs --no-edit $GITHUB_SHA
             # git push
             exit 1
 
           else
             echo "The unit test has an error. Reverting changes"
-            git config user.email $GITHUB_ACTOR
-            git config user.name $GITHUB_ACTOR
-                  # git restore .
-            git stash
-            git revert -X theirs --no-edit $GITHUB_SHA
-            git push
             exit 1
           fi
 
