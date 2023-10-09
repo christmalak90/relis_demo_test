@@ -69,19 +69,13 @@ jobs:
 
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
-                  # echo $GITHUB_SHA > last_successful_commit.txt
             git tag last_successful_commit $GITHUB_SHA
-                  # git config user.email $GITHUB_ACTOR
-                  # git config user.name $GITHUB_ACTOR
-                  # git add -f last_successful_commit.txt
             
             if git ls-remote --tags origin | grep -q "refs/tags/last_successful_commit"; then
               git push --delete origin last_successful_commit
             fi
 
             git push origin last_successful_commit
-                  # git commit -m "Update last successful commit $GITHUB_SHA"
-                  # git push
 
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes to the last successful commit."
