@@ -77,7 +77,7 @@ class User_unitTest
      */
     private function testNewUserPageURL_httpResponseCode()
     {
-        $action = "new_userxxxx";
+        $action = "new_user";
         $test_name = "Go to new user form page when user is not already logged in";
         $test_aspect = "Http response code";
         $expected_value = http_code()[200];
