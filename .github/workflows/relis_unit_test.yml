@@ -74,7 +74,10 @@ jobs:
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
               # git add -f last_successful_commit.txt
-            git push --delete origin last_successful_commit
+            
+            if git show-ref --tags --quiet "refs/tags/last_successful_commit"; then
+              git push --delete origin last_successful_commit
+              
             git push origin last_successful_commit
               # git commit -m "Update last successful commit $GITHUB_SHA"
               # git push
