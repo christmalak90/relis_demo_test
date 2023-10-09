@@ -90,14 +90,14 @@ jobs:
             git push --force
             exit 1
 
-          # else
-          #   echo "The unit test has an error. Reverting changes to the last successful commit."
-          #   revert_changes
-          #   exit 1
-          # fi
+          else
+            echo "The unit test has an error. Reverting changes to the last successful commit."
+            revert_changes
+            exit 1
+          fi
 
-      # - name: Stop all running Docker Containers
-      #   run: docker stop $(docker ps -q)
+      - name: Stop all running Docker Containers
+        run: docker stop $(docker ps -q)
 
   
 
