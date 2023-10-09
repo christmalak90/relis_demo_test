@@ -86,6 +86,7 @@ jobs:
             git config user.name $GITHUB_ACTOR
             git restore .
             git revert -X theirs --no-edit $commit_hash
+                  # git revert -X theirs --no-edit <revert_commit_hash>
             git push --force
             
             exit 1
