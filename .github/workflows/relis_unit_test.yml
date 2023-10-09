@@ -69,14 +69,14 @@ jobs:
 
           # if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
-            # git tag last_successful_commit $GITHUB_SHA
-            # if git ls-remote --tags origin | grep -q "refs/tags/last_successful_commit"; then
-            #   git push --delete origin last_successful_commit
-            # fi
-            # git push origin last_successful_commit
+            git tag last_successful_commit $GITHUB_SHA
+            if git ls-remote --tags origin | grep -q "refs/tags/last_successful_commit"; then
+              git push --delete origin last_successful_commit
+            fi
+            git push origin last_successful_commit
 
-          elif [ "$response" == "failed" ]; then
-            echo "The unit test failed. Reverting changes to the last successful commit."
+          #elif [ "$response" == "failed" ]; then
+            #echo "The unit test failed. Reverting changes to the last successful commit."
             # git fetch --unshallow
             #       # git reset --hard last_successful_commit
             #       # git push --force
@@ -89,16 +89,16 @@ jobs:
             #       # git revert -X theirs --no-edit <revert_commit_hash>
             # git push --force
             
-            exit 1
+            #exit 1
 
-          else
-            echo "The unit test has an error. Reverting changes to the last successful commit."
-            #revert_changes
-            exit 1
-          fi
+      #     else
+      #       echo "The unit test has an error. Reverting changes to the last successful commit."
+      #       #revert_changes
+      #       exit 1
+      #     fi
 
-      - name: Stop all running Docker Containers
-        run: docker stop $(docker ps -q)
+      # - name: Stop all running Docker Containers
+      #   run: docker stop $(docker ps -q)
 
   
 
