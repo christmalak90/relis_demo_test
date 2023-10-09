@@ -59,7 +59,7 @@ class User_unitTest
      */
     private function testDescriptionPageURL_httpResponseCode()
     {
-        $action = "index";
+        $action = "indexxx";
         $test_name = "Test description page url";
         $test_aspect = "Http response code";
         $expected_value = http_code()[200];
