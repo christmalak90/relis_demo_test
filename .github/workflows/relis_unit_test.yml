@@ -66,7 +66,7 @@ jobs:
                   # git revert --no-edit $GITHUB_SHA
                   # git stash pop
                   # git push
-                  curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d '{"ref": "main"}' https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/actions/workflows/main.yml/dispatches
+                  echo curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d '{"ref": "main"}' https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/actions/workflows/main.yml/dispatches
             # exit 1
 
       #     else
