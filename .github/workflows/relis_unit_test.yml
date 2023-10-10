@@ -60,13 +60,12 @@ jobs:
             echo "The unit test failed. Reverting changes"
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
-            echo $GITHUB_SHA
                   # git restore .
                   # git status
-            # git stash
-            # git revert -X theirs --no-edit $GITHUB_SHA
-            # git stash pop
-            # git push
+            git stash
+            git revert -X theirs --no-edit $GITHUB_SHA
+            git stash pop
+            git push
             exit 1
 
           else
