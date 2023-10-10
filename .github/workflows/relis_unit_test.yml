@@ -63,7 +63,7 @@ jobs:
                   # git restore .
                   # git status
             git stash
-            git revert --no-edit $GITHUB_SHA
+            git revert -X theirs --no-edit $GITHUB_SHA
             git stash pop
             git push
             exit 1
