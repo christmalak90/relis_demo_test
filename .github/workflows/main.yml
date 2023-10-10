@@ -18,7 +18,8 @@ jobs:
            fetch-depth: 0
       - name: Revert pushed commit
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git revert --no-edit HEAD
-          git push
+          # git config --global user.name 'github-actions[bot]'
+          # git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # git revert --no-edit HEAD
+          # git push
+          echo i'm triggered
