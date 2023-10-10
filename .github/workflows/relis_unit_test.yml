@@ -36,8 +36,7 @@ jobs:
         run: sleep 10
 
       - name: Set relis-app Container permission
-        run: |
-          docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
+        run: docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
 
       - name: Run Unit test
         run: |
@@ -55,15 +54,15 @@ jobs:
           
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
-            git restore .
-            git status
 
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes"
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
+                  # git restore .
+                  # git status
             git stash
-            git revert -X theirs --no-edit $GITHUB_SHA
+            git revert --no-edit $GITHUB_SHA
             git stash pop
             git push
             exit 1
