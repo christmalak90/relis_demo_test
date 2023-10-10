@@ -58,15 +58,15 @@ jobs:
 
           # elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes"
-            git config user.email $GITHUB_ACTOR
-            git config user.name $GITHUB_ACTOR
+                  # git config user.email $GITHUB_ACTOR
+                  # git config user.name $GITHUB_ACTOR
                   # git restore .
-            git status
+                  # git status
                   # git stash
-            # git revert --no-edit $GITHUB_SHA
+                  # git revert --no-edit $GITHUB_SHA
                   # git stash pop
-            # git push
-            exit 1
+                  # git push
+            # exit 1
 
       #     else
       #       echo "The unit test has an error. Reverting changes"
