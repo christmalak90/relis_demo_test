@@ -73,7 +73,7 @@ jobs:
                   curl \
                     -X POST \
                     -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                    https://api.github.com/repos/$GITHUB_ACTOR/relis_demo_test/actions/workflows/main.yml/dispatches \
+                    https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/actions/workflows/main.yml/dispatches \
                     -d '{"ref":"main"}'
 
 
