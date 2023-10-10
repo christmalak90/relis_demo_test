@@ -70,7 +70,15 @@ jobs:
                   # git revert --no-edit $GITHUB_SHA
                   # git stash pop
                   # git push
-                  curl -X POST -H "Authorization: token ${{ secrets.RELIS_TOKENN }}" -d '{"ref": "main"}' https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/actions/workflows/main.yml/dispatches
+                  curl \
+                    -X POST \
+                    -H "Accept: application/vnd.github.v3+json" \
+                    https://api.github.com/repos/christmalak90/relis_demo_test/actions/workflows/main.yml/dispatches \
+                    -d '{"ref":"main"}'
+
+
+                  # curl -X POST -H "Authorization: token ${{ secrets.RELIS_TOKEN }}" -d '{"ref": "main"}' 
+                  # https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/actions/workflows/main.yml/dispatches
             # exit 1
 
       ##     else
