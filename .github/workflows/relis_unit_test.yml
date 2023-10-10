@@ -72,7 +72,7 @@ jobs:
                   # git push
                   curl \
                     -X POST \
-                    -H "Authorization: token ${{ secrets.RELIS_TOKEN }}" \
+                    -H "Authorization: token ${{ secrets.RELIS_TOKENN }}" \
                     https://api.github.com/repos/christmalak90/relis_demo_test/actions/workflows/main.yml/dispatches \
                     -d '{"ref":"main"}'
 
