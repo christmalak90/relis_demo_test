@@ -55,6 +55,7 @@ jobs:
           
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
+            git status
 
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes"
