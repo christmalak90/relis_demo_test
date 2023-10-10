@@ -36,7 +36,9 @@ jobs:
         run: sleep 10
 
       - name: Set relis-app Container permission
-        run: docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
+        run: |
+          docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
+          docker exec relis-app chmod -R 777 /u/relis/public_html/workspace/dslforge_workspace/
 
       - name: Run Unit test
         run: |
@@ -50,7 +52,6 @@ jobs:
           # }
 
           response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
-          echo $response
           
           if [ "$response" == "successful" ]; then
             echo "The unit test passed. Proceeding with the workflow."
