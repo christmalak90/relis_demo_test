@@ -73,7 +73,7 @@ jobs:
                   curl -X POST -H "Authorization: token ${{ secrets.RELIS_TOKEN }}" -d '{"ref": "main"}' https://api.github.com/repos/$GITHUB_ACTOR/$GITHUB_REPOSITORY/actions/workflows/main.yml/dispatches
             # exit 1
 
-      #     else
+      ##     else
       #       echo "The unit test has an error. Reverting changes"
       #       exit 1
       #     fi
