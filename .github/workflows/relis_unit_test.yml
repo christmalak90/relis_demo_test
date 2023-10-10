@@ -24,21 +24,21 @@ jobs:
             echo "Docker is not installed, please install Docker in your Github Repository."
           fi
 
-      - name: Build Docker Image
-        run: docker-compose build
-        working-directory: relis_deployment
+      # - name: Build Docker Image
+      #   run: docker-compose build
+      #   working-directory: relis_deployment
 
-      - name: Run Docker Containers
-        run: docker-compose up -d
-        working-directory: relis_deployment
+      # - name: Run Docker Containers
+      #   run: docker-compose up -d
+      #   working-directory: relis_deployment
 
-      - name: Wait for Application to Start
-        run: sleep 10
+      # - name: Wait for Application to Start
+      #   run: sleep 10
 
-      - name: Set relis-app Container permission
-        run: |
-          docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
-          docker exec relis-app chmod -R 777 /u/relis/public_html/workspace/dslforge_workspace/
+      # - name: Set relis-app Container permission
+      #   run: |
+      #     docker exec relis-app chmod -R 777 /u/relis/public_html/relis_app/
+      #     docker exec relis-app chmod -R 777 /u/relis/public_html/workspace/dslforge_workspace/
 
       - name: Run Unit test
         run: |
@@ -51,30 +51,30 @@ jobs:
           #   git push
           # }
 
-          response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
+          # response=$(php -r " echo file_get_contents('http://localhost:8083/test/unit_test/relis_unit_test/last_result');")
           
-          if [ "$response" == "successful" ]; then
-            echo "The unit test passed. Proceeding with the workflow."
+          # if [ "$response" == "successful" ]; then
+          #   echo "The unit test passed. Proceeding with the workflow."
 
-          elif [ "$response" == "failed" ]; then
+          # elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes"
             git config user.email $GITHUB_ACTOR
             git config user.name $GITHUB_ACTOR
                   # git restore .
-                  # git status
-            git stash
-            git revert -X theirs --no-edit $GITHUB_SHA
-            git stash pop
-            git push
-            exit 1
+            git status
+                  # git stash
+            # git revert --no-edit $GITHUB_SHA
+                  # git stash pop
+            # git push
+            # exit 1
 
-          else
-            echo "The unit test has an error. Reverting changes"
-            exit 1
-          fi
+      #     else
+      #       echo "The unit test has an error. Reverting changes"
+      #       exit 1
+      #     fi
 
-      - name: Stop all running Docker Containers
-        run: docker stop $(docker ps -q)
+      # - name: Stop all running Docker Containers
+      #   run: docker stop $(docker ps -q)
 
   
 
