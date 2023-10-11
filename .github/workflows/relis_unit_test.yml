@@ -65,7 +65,7 @@ jobs:
                   curl \
                     -X POST \
                     -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                    https://api.github.com/repos/$GITHUB_ACTOR/$(basename $GITHUB_REPOSITORY)/actions/workflows/main.yml/dispatches \
+                    https://api.github.com/repos/$GITHUB_ACTOR/$(basename $GITHUB_REPOSITORY)/actions/workflows/revert_pushed_commit.yml/dispatches \
                     -d '{"ref":"main"}'
             exit 1
 

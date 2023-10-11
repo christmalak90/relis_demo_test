@@ -1,24 +1,25 @@
+############################### NEW ################################
 name: Revert pushed commit
+
 on: 
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch name'
-        required: true
-        default: 'main'
+    branch:
+      - main
 
 jobs:
   revert_commit:
     runs-on: ubuntu-latest
+    
     steps: 
       - name: Checkout branch
         uses: actions/checkout@v3
         with:
            ref: ${{ github.event.inputs.branch }}
            fetch-depth: 0
+           
       - name: Revert pushed commit
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name $GITHUB_ACTOR
+          git config --global user.email $GITHUB_ACTOR
           git revert --no-edit HEAD
           git push
