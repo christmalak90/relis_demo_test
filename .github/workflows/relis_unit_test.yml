@@ -1,12 +1,12 @@
 ############################### NEW ################################
 name: Relis unit test
-env:
-  RELIS_TOKEN: ${{ secrets.RELIS_TOKEN }}
 
 on:
   push:
     branches:
       - main
+
+permissions: write-all
 
 jobs:
   relis_unit_testing:
