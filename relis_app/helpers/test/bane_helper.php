@@ -50,7 +50,7 @@ class User_unitTest
         $this->testLoginPageURL_userAlreadyConnected_redirectedURL();
     }
 
-    /*
+    /* 
      * Controller : User
      * Action : index
      * Description : This test verifies the behavior of the 'index' action.
@@ -59,7 +59,7 @@ class User_unitTest
      */
     private function testDescriptionPageURL_httpResponseCode()
     {
-        $action = "index";
+        $action = "indexx";
         $test_name = "Test description page url";
         $test_aspect = "Http response code";
         $expected_value = http_code()[200];
