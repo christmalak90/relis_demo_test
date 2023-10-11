@@ -8,8 +8,6 @@ on:
     branches:
       - main
 
-permissions: write-all
-
 jobs:
   relis_unit_testing:
     runs-on: ubuntu-latest
@@ -17,8 +15,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.RELIS_TOKEN }}
       
       - name: Check if Docker is installed
         run: |
@@ -75,10 +71,6 @@ jobs:
                     -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                     https://api.github.com/repos/$GITHUB_ACTOR/$(basename $GITHUB_REPOSITORY)/actions/workflows/main.yml/dispatches \
                     -d '{"ref":"main"}'
-
-
-                  # curl -X POST -H "Authorization: token ${{ secrets.RELIS_TOKEN }}" -d '{"ref": "main"}' 
-                  # https://api.github.com/repos/$GITHUB_ACTOR/$(basename $GITHUB_REPOSITORY)/actions/workflows/main.yml/dispatches
             # exit 1
 
       ##     else
