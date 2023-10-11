@@ -2,7 +2,7 @@
 name: Relis unit test
 
 on:
-  push:
+  pull_request:
     branches:
       - develop
 
@@ -54,13 +54,13 @@ jobs:
           elif [ "$response" == "failed" ]; then
             echo "The unit test failed. Reverting changes"
             echo "Browse to http://localhost:8083/test/unit_test/relis_unit_test in you local browser for more details"
-            revert_changes
+            # revert_changes
             exit 1
 
           else
             echo "The unit test has an error. Reverting changes"
             echo $response
-            revert_changes
+            # revert_changes
             exit 1
           fi
 
