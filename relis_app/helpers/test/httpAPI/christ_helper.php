@@ -4,9 +4,12 @@
 class UnitTest
 {
     private $ci;
+    private $cookieFile;
+
     function __construct()
     {
         $this->ci = get_instance();
+        $this->cookieFile = 'relis_app/helpers/test/httpAPI/cookies.txt';
     }
 
     function http_GET($endpoint, $headers = [])
@@ -44,6 +47,10 @@ class UnitTest
         curl_setopt($curl, CURLOPT_MAXREDIRS, 1); // Maximum number of redirects to follow
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
+        // Set the cookie file to save and send cookies
+        curl_setopt($curl, CURLOPT_COOKIEJAR, $this->cookieFile);
+        curl_setopt($curl, CURLOPT_COOKIEFILE, $this->cookieFile);
+
         if ($method === 'POST' || $method === 'PUT') {
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
         }
@@ -73,6 +80,17 @@ class UnitTest
             'content' => $content,
             'url' => $urlInfo['url'],
         ];
+    }
+
+    public function unset_cookie($cookie_name) {
+        // Read the content of the cookie file
+        $cookieContent = file_get_contents($this->cookieFile);
+    
+        // Remove cookie entry
+        $cookieContent = preg_replace('/\b' . $cookie_name . '\b.*\R?/', '', $cookieContent);
+    
+        // Write the updated content back to the cookie file
+        file_put_contents($this->cookieFile, $cookieContent);
     }
 
     function response($controller, $action, $data = [], $http_method = "GET")

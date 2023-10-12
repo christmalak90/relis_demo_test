@@ -81,6 +81,8 @@ class User_unitTest
         $test_name = "Go to new user form page when user is not already logged in";
         $test_aspect = "Http response code";
         $expected_value = http_code()[200];
+        //unset authentication cookie
+        $this->unitTtest->unset_cookie('relis_session');
         $get_response = $this->unitTtest->response($this->controller, $action);
         $actual_value = $get_response['status_code'];
         $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
@@ -89,39 +91,49 @@ class User_unitTest
     /*
      * Controller : User
      * Action : new_user
-     * Description : This test verifies the behavior of the 'new_user' action when a user is already logged in (there is an open user session).
-     * Scenario : When a user is already logged in and clicks the 'create user' link, the user should be redirected to the 'home/index' url to be automatically logged in.
+     * Description : This test verifies the behavior of the 'new_user' action (Navigate to new user form page) when a user is already logged in (there is an open user session).
+     * Scenario : When a user is already logged in and clicks the 'create user' link (Navigate to new user form page), the user should be redirected to the 'home/index' url to be automatically logged in.
      * Expected HTTP Response Code : 307 (indicating a temporary Redirect code)
      */
     private function testNewUserPageURL_userAlreadyConnected_httpResponseCode()
     {
-        // $action = "new_user";
-        // $test_name = "Go to new user form page when user is already logged in";
-        // $test_aspect = "Http response code";
-        // $expected_value = http_code()[307];
-        // $get_response = $this->unitTtest->response($this->controller, $action, ['Cookie: relis_session=dsqrv2lu49khh5g6gmvsq8pked3vabjt']);
-        // $actual_value = $get_response['status_code'];
-        // $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        $action = "new_user";
+        $test_name = "Go to new user form page when user is already logged in";
+        $test_aspect = "Http response code";
+        $expected_value = http_code()[307];
+        //Login
+        $this->unitTtest->response($this->controller, "check_form", ['user_username' => 'admin', 'user_password' => '123'], "POST");
+        //Navigate to new user form page
+        $get_response = $this->unitTtest->response($this->controller, $action);
+        $actual_value = $get_response['status_code'];
+        $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        //unset authentication cookie
+        $this->unitTtest->unset_cookie('relis_session');
     }
 
     /*
      * Controller : User
      * Action : new_user
-     * Description : This test verifies the behavior of the 'new_user' action when a user is already logged in (there is an open user session).
-     * Scenario : When a user is already logged in and clicks the 'create user' link, the user should be redirected to the 'home/index' url to be automatically logged in.
+     * Description : This test verifies the behavior of the 'new_user' action (Navigate to new user form page) when a user is already logged in (there is an open user session).
+     * Scenario : When a user is already logged in and clicks the 'create user' link (Navigate to new user form page), the user should be redirected to the 'home/index' url to be automatically logged in.
      * Expected URL : home (The expected URL after the user's action)
      */
     private function testNewUserPageURL_userAlreadyConnected_redirectedURL()
     {
-        // $action = "new_user";
-        // $test_name = "Go to new user form page when user is already logged in";
-        // $test_aspect = "Redirected URL";
-        // $expected_value = "home";
-        // $get_response = $this->unitTtest->response($this->controller, $action, ['Cookie: relis_session=dsqrv2lu49khh5g6gmvsq8pked3vabjt']);
-        // preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
-        // $url = $matches[1];
-        // $actual_value = $url;
-        // $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        $action = "new_user";
+        $test_name = "Go to new user form page when user is already logged in";
+        $test_aspect = "Redirected URL";
+        $expected_value = "home";
+        //Login
+        $this->unitTtest->response($this->controller, "check_form", ['user_username' => 'admin', 'user_password' => '123'], "POST");
+        //Navigate to new user form page
+        $get_response = $this->unitTtest->response($this->controller, $action);
+        preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
+        $url = $matches[1];
+        $actual_value = $url;
+        $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        //unset authentication cookie
+        $this->unitTtest->unset_cookie('relis_session');
     }
 
     /*
@@ -575,8 +587,8 @@ class User_unitTest
     /*
      * Controller : User
      * Action : login
-     * Description : This test verifies the behavior of the 'login' action when a user is not already logged in (there is no open user session).
-     * Scenario : When a user is not logged in and clicks the 'Go to ReLiS' link, the user should be directed to the 'login' HTML form.
+     * Description : This test verifies the behavior of the 'login' action (go to login form page) when a user is not already logged in (there is no open user session).
+     * Scenario : When a user is not logged in and clicks the 'Go to ReLiS' link (go to login form page), the user should be directed to the 'login' HTML form page.
      * Expected HTTP Response Code : 200 (indicating a successful response from the server).
      */
     private function testLoginPageURL_httpResponseCode()
@@ -593,39 +605,49 @@ class User_unitTest
     /*
      * Controller : User
      * Action : login
-     * Description : This test verifies the behavior of the 'login' action when a user is already logged in (there is an open user session).
-     * Scenario : When a user is already logged in and clicks the 'Go to ReLiS' link, the user should be redirected to the 'home/index' url to be automatically logged in.
+     * Description : This test verifies the behavior of the 'login' action (go to login form page) when a user is already logged in (there is an open user session).
+     * Scenario : When a user is already logged in and clicks the 'Go to ReLiS' link (go to login form page), the user should be redirected to the 'home/index' url to be automatically logged in.
      * Expected HTTP Response Code : 307 (indicating a temporary Redirect code)
      */
     private function testLoginPageURL_userAlreadyConnected_httpResponseCode()
     {
-        // $action = "login";
-        // $test_name = "Go to login form page when user is already logged in";
-        // $test_aspect = "Http response code";
-        // $expected_value = http_code()[307];
-        // $get_response = $this->unitTtest->response($this->controller, $action, ['Cookie: relis_session=dsqrv2lu49khh5g6gmvsq8pked3vabjt']);
-        // $actual_value = $get_response['status_code'];
-        // $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        $action = "login";
+        $test_name = "Go to login form page when user is already logged in";
+        $test_aspect = "Http response code";
+        $expected_value = http_code()[307];
+        // Login
+        $this->unitTtest->response($this->controller, "check_form", ['user_username' => 'admin', 'user_password' => '123'], "POST");
+        // Navigate to login form page
+        $get_response = $this->unitTtest->response($this->controller, $action);
+        $actual_value = $get_response['status_code'];
+        $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        //unset authentication cookie
+        $this->unitTtest->unset_cookie('relis_session');
     }
 
     /*
      * Controller : User
      * Action : login
-     * Description : This test verifies the behavior of the 'login' action when a user is already logged in (there is an open user session).
-     * Scenario : When a user is already logged in and clicks the 'Go to ReLiS' link, the user should be redirected to the 'home/index' url to be automatically logged in.
+     * Description : This test verifies the behavior of the 'login' action (go to login form page) when a user is already logged in (there is an open user session).
+     * Scenario : When a user is already logged in and clicks the 'Go to ReLiS' link (go to login form page), the user should be redirected to the 'home/index' url to be automatically logged in.
      * Expected URL : home (The expected URL after the user's action)
      */
     private function testLoginPageURL_userAlreadyConnected_redirectedURL()
     {
-        // $action = "login";
-        // $test_name = "Go to login form page when user is already logged in";
-        // $test_aspect = "Redirected URL";
-        // $expected_value = 'home';
-        // $get_response = $this->unitTtest->response($this->controller, $action, ['Cookie: relis_session=dsqrv2lu49khh5g6gmvsq8pked3vabjt']);
-        // preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
-        // $url = $matches[1];
-        // $actual_value = $url;
-        // $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        $action = "login";
+        $test_name = "Go to login form page when user is already logged in";
+        $test_aspect = "Redirected URL";
+        $expected_value = 'home';
+        //Login
+        $this->unitTtest->response($this->controller, "check_form", ['user_username' => 'admin', 'user_password' => '123'], "POST");
+        // Navigate to login form page
+        $get_response = $this->unitTtest->response($this->controller, $action);
+        preg_match('/8083\/(.*?)(\.html)?$/', $get_response['url'], $matches);
+        $url = $matches[1];
+        $actual_value = $url;
+        $this->unitTtest->run_test($this->controller, $action, $test_name, $test_aspect, $expected_value, $actual_value);
+        //unset authentication cookie
+        $this->unitTtest->unset_cookie('relis_session');
     }
 }
 
