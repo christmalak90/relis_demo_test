@@ -1,5 +1,4 @@
 <?php
-////////////////////////////////// NEW //////////////////////////////////
 /* ReLiS - A Tool for conducting systematic literature reviews and mapping studies.
  * Copyright (C) 2018  Eugene Syriani
  *
@@ -371,7 +370,7 @@ class User extends CI_Controller
         }
         $recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
 
-        if ($recaptchaResponse != "relis_test") {
+        if ($recaptchaResponse != "relis_test") {////////////////////////////////// NEW //////////////////////////////////
             $validatedCaptcha = $this->validateCaptcha($recaptchaResponse);
             if (!$validatedCaptcha) {
                 $data['content_item'] = $post_arr;
