@@ -31,9 +31,9 @@ class Unit_test extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->helper('tests/helpers/http_client');
+        $this->load->helper('tests/helpers/christ');
         $this->load->helper('tests/helpers/unit_test');
-        $this->load->helper('tests/user_unitTest');
+        $this->load->helper('tests/bane');
         // $this->load->helper('test/project_test');
         // $this->load->helper('test/paper_test');
         // $this->load->helper('test/screening_test');
