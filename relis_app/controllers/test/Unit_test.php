@@ -32,7 +32,7 @@ class Unit_test extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('tests/helpers/christ');
-        $this->load->helper('tests/helpers/unit_test');
+        $this->load->helper('tests/helpers/nit');
         $this->load->helper('tests/bane');
         // $this->load->helper('test/project_test');
         // $this->load->helper('test/paper_test');
