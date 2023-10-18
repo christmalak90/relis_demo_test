@@ -59,7 +59,7 @@ jobs:
 
           else
             echo "The unit test has an error. Reverting changes"
-            echo $response
+            # echo $response
             revert_changes
             exit 1
           fi
