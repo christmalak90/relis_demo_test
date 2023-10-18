@@ -1,5 +1,4 @@
-################# NEW #################
-FROM php:7.3-apache-buster
+FROM php:7.1-apache-buster
 
 ARG DIRECTORY_INDEX
 ARG DOCUMENT_ROOT
