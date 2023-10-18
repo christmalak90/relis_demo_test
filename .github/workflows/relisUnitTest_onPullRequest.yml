@@ -2,7 +2,7 @@
 name: Relis unit test
 
 on:
-  push:
+  pull_request:
     branches:
       - develop
 
